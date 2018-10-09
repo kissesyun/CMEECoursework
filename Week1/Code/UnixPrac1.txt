@@ -1,0 +1,11 @@
+###(Under CMEECouursework/Week1/Data/fasta/ directory)
+###1 count lines in each fasta file
+wc -l *.fasta
+###2 print E.coli seq
+tail -n +2 E.coli.fasta
+###3 seq length of E.coli genome
+tail -n +2 E.coli.fasta | tr -d '\n' | wc -m
+###4 number of pattern ATGC in E.coli genome 
+tail -n +2 E.coli.fasta > Seq_of_E.coli.txt && grep ATCG -o Seq_of_E.coli.txt | wc -l
+###5 calc AT/GC ratio
+AT=$(grep 'A\|T' -o Seq_of_E.coli.txt | wc -l) && GC=$(grep 'C\|G' -o Seq_of_E.coli.txt | wc -l) && z=$(echo "scale=3 ; $AT / $GC" | bc) && echo ratio=$z

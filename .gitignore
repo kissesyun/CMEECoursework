@@ -1,4 +1,7 @@
 .DS_Store
 .AppleDouble
 .LSOverride
+/Week1/Code/.log
+/Week1/Code/.Rhistory
 /Week2/Code/__pycache__/**
+/Week1/Result/**

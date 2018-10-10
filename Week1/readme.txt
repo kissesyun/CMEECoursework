@@ -29,18 +29,20 @@ Used wget or git clone
 
 2.Code folder:
   (1)csvtospace.sh (shell script to convert commas to spaces in a file)
-  (2)FirstExample.tex (LaTex example script), FirstBiblio.bib (bibliography file),   CompileLaTeX.sh (latex running script)
-  (3) UnixPrac1.txt (practical for Unix chapter in a txt including answers to 5 questions)
+  (2)FirstExample.tex (LaTex example script), FirstBiblio.bib (bibliography file), CompileLaTeX.sh (latex running script)
+  (3)UnixPrac1.txt (practical for Unix chapter in a txt including answers to 5 questions)
 
 3.Result folder:
 Here is where the result from Code goes into.
 
 4.Sandbox folder:
-some simple practice bash scripts (learn and test) including:
+Some simple practice bash scripts (learn and test) including:
 boilerplate.sh
 ConcatenateTwoFile,sh
 CountLines.sh
 MyExampleScript.sh
 tabtocsv.sh
 variable.sh
+Also some files I created to test the code.
 
+Thanks for reading me! I hope you or myself later on find it helpful~

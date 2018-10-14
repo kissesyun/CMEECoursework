@@ -1,0 +1,336 @@
+Starting weekly assessment for Shiyun, Week1
+
+Current Points = 100
+
+Note that: 
+(1) Major sections begin with a double "====" line 
+(2) Subsections begin with a single "====" line 
+(3) Code output or text file content are printed within single "*****" lines 
+
+======================================================================
+======================================================================
+Your Git repo size this week is about 3.10 MiB on disk 
+
+PART 1: Checking project workflow...
+
+Found the following directories in parent directory: Week1, Assessment, Week2, .git
+
+Found the following files in parent directory: README.txt, .gitignore
+
+Checking for key files in parent directory...
+
+Found .gitignore in parent directory, great! 
+
+Printing contents of .gitignore:
+**********************************************************************
+.DS_Store
+.AppleDouble
+.LSOverride
+/Week1/Code/.log
+/Week1/Code/.Rhistory
+/Week2/Code/__pycache__/**
+/Week1/Result/**
+**********************************************************************
+
+Found README in parent directory, named: README.txt
+
+Printing contents of README.txt:
+**********************************************************************
+This is Shiyun Liu's CMEE 2018-2019 Coursework Repository.
+Ordered by week.
+Contact address: s.liu18@imperial.ac.uk
+**********************************************************************
+
+======================================================================
+Looking for the weekly directories...
+
+Found 2 weekly directories: Week1, Week2
+
+The Week1 directory will be assessed 
+
+======================================================================
+======================================================================
+PART 2: Checking weekly code and workflow...
+
+======================================================================
+Assessing WEEK1...
+
+Found the following directories: Code, Result, Data, Sandbox
+
+Found the following files: readme.txt
+
+Checking for readme file in weekly directory...
+
+Found README in parent directory, named: readme.txt
+
+Printing contents of readme.txt:
+**********************************************************************
+Here are Shiyun’s week1（01.10.2018 - 07.10.2018）files for CMEE.
+
+The content is about 1.Unix, 2.shell scripting, 3.version control with git and 4.LaTex.
+1. Basic Unix commands: 
+   (1)brew install software, e.g.visual studio code
+   (2)open new file and folder and move around, mkdir, touch, nano, cp, mv
+   (3)ls, cd, pwd, man
+   (4)wc, grep, find, echo, cat
+2. Bash script:
+   (1)run example .sh files
+   (2)use read to enter variable.
+3. Version control using git to trace the changes I made and back up:
+   (1)have remote repository on github and use ssh to link my local repository with my local one.
+   (2)use git add, git commit and git push
+   (3)always check git status
+   (4)add gitignore to stop tracing some certain files
+4. LaTex writing scientific documents:
+   (1)install LaTex
+   (2)turn .tex to pdf by pdflatex 
+   (3)add citation by bibtex, citation information in .bib file
+                        
+The commands run in Bash or other Unix-based env.
+Program needed to be installed: LaTex 
+4 folders included.
+
+1.Data folder:
+Some fasta files and csv files got from github.
+Used wget or git clone 
+
+2.Code folder:
+  (1)csvtospace.sh (shell script to convert commas to spaces in a file)
+  (2)FirstExample.tex (LaTex example script), FirstBiblio.bib (bibliography file), CompileLaTeX.sh (latex running script)
+  (3)UnixPrac1.txt (practical for Unix chapter in a txt including answers to 5 questions)
+
+3.Result folder:
+Here is where the result from Code goes into.
+
+4.Sandbox folder:
+Some simple practice bash scripts (learn and test) including:
+boilerplate.sh
+ConcatenateTwoFile,sh
+CountLines.sh
+MyExampleScript.sh
+tabtocsv.sh
+variable.sh
+Also some files I created to test the code.
+
+Thanks for reading me! I hope you or myself later on find it helpful~
+**********************************************************************
+
+Found following files in results directory: .csv, readme.txt...
+ideally, Results directory should be empty other than, perhaps, a readme. 
+
+Found 5 code files: CompileLaTeX.sh, csvtospace.sh, FirstExample.tex, FirstBiblio.bib, UnixPrac1.txt
+
+======================================================================
+Testing script/code files...
+
+======================================================================
+Inspecting script file CompileLaTeX.sh...
+
+File contents are:
+**********************************************************************
+#!/bin/bash
+
+#use latex to generate pdf file based on our tex file and add citation by using .bib file
+pdflatex $1.tex
+pdflatex $1.tex
+bibtex $1.tex
+pdflatex $1.tex
+pdflatex $1.tex
+evince $1.pdf &
+
+## Cleanup several files that are generated during the run
+rm *~
+rm *.aux
+rm *.dvi
+rm *.log
+rm *.nav
+rm *.out
+rm *.snm
+rm *.toc
+rm *.bbl
+rm *.blg
+
+## move the result to Result folder
+mv $1.pdf ../Result/
+**********************************************************************
+
+Testing CompileLaTeX.sh...
+
+Output (only first 500 characters): 
+
+**********************************************************************
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(/usr/share/texlive/texmf-dist/tex/latex/tools/.tex
+LaTeX2e <2016/02/01>
+Babel <3.9q> and hyphenation patterns for 81 language(s) loaded.
+File ignored)
+*
+! Emergency stop.
+<*> .tex
+        
+!  ==> Fatal error occurred, no output PDF file produced!
+Transcript written on .log.
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (pre
+**********************************************************************
+
+Encountered error:
+rm: cannot remove '*~': No such file or directory
+rm: cannot remove '*.aux': No such file or directory
+rm: cannot remove '*.dvi': No such file or directory
+rm: cannot remove '*.log': No such file or directory
+rm: cannot remove '*.nav': No such file or directory
+rm: cannot remove '*.out': No such file or directory
+rm: cannot remove '*.snm': No such file or directory
+rm: cannot remove '*.toc': No such file or directory
+rm: cannot remove '*.bbl': No such file or directory
+rm: cannot remove '*.blg': No such file or directory
+mv: cannot stat '.pdf': No such file or directory
+
+** (evince:24095): WARNING **: Error when getting information for file '/home/mhasoba/Documents/Teaching/IC_CMEE/2018-19/Coursework/StudentRepos/ShiyunLiu_SL518/Week1/Code/.pdf': No such file or directory
+
+** (evince:24095): WARNING **: Error setting file metadata: No such file or directory
+
+** (evince:24095): WARNING **: Error setting file metadata: No such file or directory
+
+** (evince:24095): WARNING **: Error setting file metadata: No such file or directory
+
+** (evince:24095): WARNING **: Error setting file metadata: No such file or directory
+
+** (evince:24095): WARNING **: Error setting file metadata: No such file or directory
+
+** (evince:24095): WARNING **: Error setting file metadata: No such file or directory
+
+** (evince:24095): WARNING **: Error setting file metadata: No such file or directory
+
+** (evince:24095): WARNING **: Error setting file metadata: No such file or directory
+
+** (evince:24095): WARNING **: Error setting file metadata: No such file or directory
+
+** (evince:24095): WARNING **: Error setting file metadata: No such file or directory
+
+** (evince:24095): WARNING **: Error setting file metadata: No such file or directory
+
+======================================================================
+Inspecting script file csvtospace.sh...
+
+File contents are:
+**********************************************************************
+#!/bin/bash
+# Author: Shiyun Liu s.liu18@imperial.ac.uk
+# Script: csvtospace.sh
+# Desc: substitute the commas in the files with spaces
+# saves the output into a .csv file
+# Arguments: 1-> tab delimited file
+# Date: Oct 2018
+
+### give a caption
+echo "Creating a comma delimited version of $1 ..."
+
+### take out the content in the file and use tr to substitute commas with spaces and save it to a new file
+cat $1 | tr -s "," " " > $1.csv
+
+###move the result to Result folder
+mv $1.csv ../Result/
+
+echo "Done!"
+exit
+
+**********************************************************************
+
+Testing csvtospace.sh...
+
+Output (only first 500 characters): 
+
+**********************************************************************
+Creating a comma delimited version of  ...
+Done!
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.01336s
+
+======================================================================
+Inspecting script file FirstExample.tex...
+
+File contents are:
+**********************************************************************
+\documentclass[12pt]{article}
+\title{A Simple Document}
+\author{Shiyun Liu}}
+\date{10.2018}
+\begin{document}
+  \maketitle
+  \begin{abstract}
+    This paper must be cool!
+  \end{abstract}
+  \section{Introduction}
+    Blah Blah!
+  \section{Materials \& Methods}
+  One of the most famous equations is:
+  \begin{equation}
+    E = mc^2
+  \end{equation}
+  This equation was first proposed by Einstein in 1905
+  \cite{einstein1905does}.
+  \bibliographystyle{plain}
+  \bibliography{FirstBiblio}
+\end{document}
+**********************************************************************
+
+Testing FirstExample.tex...
+
+======================================================================
+Inspecting script file FirstBiblio.bib...
+
+File contents are:
+**********************************************************************
+@article{einstein1905does,
+  title={Does the inertia of a body depend upon its energy-content?},
+  author={Einstein, A.},
+  journal={Annalen der Physik},
+  volume={18},
+  pages={639--641},
+  year={1905}
+}
+**********************************************************************
+
+Testing FirstBiblio.bib...
+
+======================================================================
+Inspecting script file UnixPrac1.txt...
+
+File contents are:
+**********************************************************************
+###(Under CMEECouursework/Week1/Data/fasta/ directory)
+cd ../Data/fasta/
+###1 count lines in each fasta file: use wc -l to show the line number and apply that to all file ended with .fasta
+wc -l *.fasta
+###2 print E.coli seq: use tail to print content after a certain line
+tail -n +2 E.coli.fasta
+###3 seq length of E.coli genome: remove the newline character to avoid counting them using wc -m, which counts the character number in a file
+tail -n +2 E.coli.fasta | tr -d '\n' | wc -m
+###4 number of pattern ATGC in E.coli genome: save the pure genome sequence and use grep to find a certain pattern and then count the number of that pattern
+tail -n +2 E.coli.fasta | tr -d '\n' > Seq_of_E.coli.txt && grep ATGC -o Seq_of_E.coli.txt | wc -l
+###5 calc AT/GC ratio: use grep to find and number of A and T, C and G. Do the math by applying bc and define the precision by scale
+AT=$(grep 'A\|T' -o Seq_of_E.coli.txt | wc -l) && GC=$(grep 'C\|G' -o Seq_of_E.coli.txt | wc -l) && z=$(echo "scale=3 ; $AT / $GC" | bc) && echo ratio=$z**********************************************************************
+
+Testing UnixPrac1.txt...
+
+======================================================================
+======================================================================
+Finished running scripts
+
+Ran into 1 errors
+
+======================================================================
+======================================================================
+
+FINISHED WEEKLY ASSESSMENT
+
+Current Points for the Week = 100
+
+NOTE THAT THESE ARE POINTS, NOT MARKS FOR THE WEEK!

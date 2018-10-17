@@ -39,6 +39,7 @@ def main(argv):
         print(row)
         print ("The genus is: ") 
         print(row[0] + '\n')
+        #ipdb.set_trace()
         if is_an_oak(row[0]):
             print('FOUND AN OAK!\n')
             csvwrite.writerow([row[0], row[1]])    
@@ -49,4 +50,3 @@ def main(argv):
 if (__name__ == "__main__"):
     status = main(sys.argv)
 
-doctest.testmod()    

@@ -75,10 +75,6 @@ for i in range(l1): #Note that you just take the last alignment with the highest
         sc=[]  #create an empty list to store the new best alignments
         sc.append(my_best_align_aga) #add in new alignments
     
- 
-#import ipdb; ipdb.set_trace()
-
-
 
 import sys
 f = open("../Result/alignment_better.txt", "w")

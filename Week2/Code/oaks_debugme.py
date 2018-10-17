@@ -29,7 +29,7 @@ doctest.testmod()
     
 def main(argv): 
     f = open('../Data/TestOaksData.csv','r')
-    g = open('../Data/JustOaksData.csv','w')
+    g = open('../Result/JustOaksData.csv','w')
     taxa = csv.reader(f)
     csvwrite = csv.writer(g)
     csvwrite.writerow(['Genus','species'])

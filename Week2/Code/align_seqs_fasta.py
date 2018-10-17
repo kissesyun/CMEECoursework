@@ -5,6 +5,10 @@ __author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'
 __version__ = '0.0.1'
 import sys
 
+# use sys.argv to take the external input.
+### Note that the fasta files are under Week2/Data/fasta/ directory
+
+
 with open(sys.argv[1]) as file_one:
     sequence = file_one.read()
 lines = sequence.split('\n',1)[-1]

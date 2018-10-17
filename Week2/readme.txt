@@ -13,7 +13,7 @@ Program needed to be installed: python3, ipython3; other packages not specifical
 4 folders included.(Results in the Result file are ignored for assessment use)
 .
 ├── Code
-│   ├── align_seqs.py
+│   ├── align_seqs.py
 │   ├── align_seqs_better.py
 │   ├── align_seqs_fasta.py
 │   ├── basic_csv.py
@@ -34,7 +34,6 @@ Program needed to be installed: python3, ipython3; other packages not specifical
 │   ├── tuple.py
 │   └── using_name.py
 ├── Data
-│   ├── JustOaksData.csv
 │   ├── TestOaksData.csv
 │   ├── bodymass.csv
 │   ├── fasta
@@ -44,9 +43,11 @@ Program needed to be installed: python3, ipython3; other packages not specifical
 │   ├── seq.csv
 │   └── testcsv.csv
 ├── Result
+│   ├── JustOaksData.csv
 │   ├── alignment.txt
 │   ├── alignment_better.txt
-│   └── alignment_fasta.txt
+│   ├── alignment_fasta.txt
+│   └── readme.txt
 ├── Sandbox
 │   ├── test.txt
 │   └── testout.txt

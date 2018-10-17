@@ -1,5 +1,6 @@
 #! /user/bin/env python3
-"""Check if the input string matches the strings in csv file"""
+"""Check if the input species name matches the specific genus in a csv file.
+   So that we know which ones the in the species recording csv belong to the certain genus"""
 
 __author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'
 __version__ = '0.0.1'
@@ -7,6 +8,7 @@ __version__ = '0.0.1'
 import csv
 import sys
 import doctest
+import ipdb 
 
 #Define function
 def is_an_oak(name):
@@ -15,14 +17,16 @@ def is_an_oak(name):
     False
     >>> is_an_oak('Quercuss')
     False
+    >>> is_an_oak('Quercus robur')
+    True
     """
-    return name.lower() == ('quercus')
-#import ipdb; ipdb.set_trace()
+    return name.lower().split()[0] == ('quercus')
 
-doctest.testmod()
+#ipdb.set_trace()
 
+doctest.testmod()   
 
-
+    
 def main(argv): 
     f = open('../Data/TestOaksData.csv','r')
     g = open('../Data/JustOaksData.csv','w')
@@ -35,7 +39,6 @@ def main(argv):
         print(row)
         print ("The genus is: ") 
         print(row[0] + '\n')
-        #import ipdb; ipdb.set_trace()
         if is_an_oak(row[0]):
             print('FOUND AN OAK!\n')
             csvwrite.writerow([row[0], row[1]])    
@@ -45,3 +48,5 @@ def main(argv):
     
 if (__name__ == "__main__"):
     status = main(sys.argv)
+
+doctest.testmod()    

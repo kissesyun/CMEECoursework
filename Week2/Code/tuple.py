@@ -1,5 +1,5 @@
 #! /user/bin/env python3
-"""print tuples in tuple on separate line"""
+"""Print tuples in tuple on separate line"""
 
 __author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'
 __version__ = '0.0.1'

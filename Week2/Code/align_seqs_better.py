@@ -1,19 +1,23 @@
 #! /user/bin/env python3
-"""Align two DNA sequences, show the best alignment and score. Need to take external arguments"""
+"""An updated version of align_seqs.py.
+   Align two given DNA sequences, show all the best alignments and their score"""
 
 __author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'
 __version__ = '0.0.1'
-import sys
 
-with open(sys.argv[1]) as file_one:
-    sequence = file_one.read()
-lines = sequence.split('\n',1)[-1]
-seq1= lines.strip('\n')
+# Two example sequences to match
+# seq2 = "ATCGCCGGATTACGGG"
+# seq1 = "CAATTCGGAT"
+#Save the template to a csvfile, use comma to seperate
 
-with open(sys.argv[2]) as file_two:
-    sequence = file_two.read()
-lines = sequence.split('\n',1)[-1]
-seq2= lines.strip('\n')
+
+import csv
+with open('../Data/seq.csv') as csvfile:            #read csv.file in python
+    readCSV = csv.reader(csvfile, delimiter=',')
+    for row in readCSV:
+        seq2 = row[0]
+        seq1 = row[1]
+
 
 
 # Assign the longer sequence s1, and the shorter to s2
@@ -41,13 +45,14 @@ def calculate_score(s1, s2, l1, l2, startpoint):
                 score = score + 1
             else:
                 matched = matched + "-"
+    #import ipdb; ipdb.set_trace()
 
     # some formatted output
-    # print("." * startpoint + matched)           
-    # print("." * startpoint + s2)
-    # print(s1)
-    # print(score) 
-    # print(" ")
+    print("." * startpoint + matched)           
+    print("." * startpoint + s2)
+    print(s1)
+    print(score) 
+    print(" ")
 
     return score
 
@@ -60,27 +65,34 @@ def calculate_score(s1, s2, l1, l2, startpoint):
 my_best_align = None
 my_best_score = -1
 
-for i in range(l1): # Note that you just take the last alignment with the highest score
+for i in range(l1): #Note that you just take the last alignment with the highest score
     z = calculate_score(s1, s2, l1, l2, i)
     if z > my_best_score:
-        my_best_align = "." * i + s2 # think about what this is doing!
+        my_best_align = "." * i + s2 #think about what this is doing!
         my_best_score = z 
-        
+    elif z == my_best_score:           #use else if to state the circumstance where there are more than one best alignment score
+        my_best_align_aga = "." * i + s2 
+        sc=[]  #create an empty list to store the new best alignments
+        sc.append(my_best_align_aga) #add in new alignments
+    
+ 
+#import ipdb; ipdb.set_trace()
+
+
 
 import sys
-f = open("../Result/alignment_fasta.txt", "w")
+f = open("../Result/alignment_better.txt", "w")
 sto = sys.stdout   #save stdout so we can revert back to it
 sys.stdout = f  #from now on, anything that is printed will go to .txt
 
 print(my_best_align)
+for item in sc:             #use for loop to print the items in the list on seperate lines
+    print(item)
 print(s1)
 print("Best score:", my_best_score)
 
 f.close()
-sys.stdout = sto #reestablish the regular stdout
-
-
-
+sys.stdout = sto  #reestablish the regular stdout
 
 
 

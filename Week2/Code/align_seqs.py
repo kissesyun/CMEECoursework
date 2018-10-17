@@ -1,5 +1,5 @@
 #! /user/bin/env python3
-"""Align two DNA sequences, show the best alignment and score"""
+"""Align two given DNA sequences, show the best alignment and score"""
 
 __author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'
 __version__ = '0.0.1'

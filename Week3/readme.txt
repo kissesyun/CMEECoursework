@@ -21,6 +21,7 @@ Program needed to be installed: Rstudio
 │   ├── Vectorize1.R
 │   ├── Vectorize2.R
 │   ├── apply1.R
+│   ├── apply2.R
 │   ├── basic_io.R
 │   ├── boilerplate.R
 │   ├── break.R
@@ -32,7 +33,8 @@ Program needed to be installed: Rstudio
 │   ├── next.R
 │   ├── preallocate.R
 │   ├── run_get_TreeHeight.sh
-│   └── sample.R
+│   ├── sample.R
+│   └── try.R
 ├── Data
 │   ├── EcolArchives-E089-51-D1.csv
 │   ├── GPDDFiltered.RData
@@ -42,8 +44,10 @@ Program needed to be installed: Rstudio
 │   ├── MyData.csv
 │   ├── TreeHts.csv
 │   ├── correlation_result.pdf
+│   ├── readme.txt
 │   └── trees_treeheights.csv
 ├── Sandbox
+│   └── readme.txt
 └── readme.txt
 
 1.Data folder:

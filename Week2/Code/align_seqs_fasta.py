@@ -1,4 +1,4 @@
-#! /user/bin/env python3
+#! /usr/bin/env python3
 """Align two DNA sequences, show the best alignment and score. Need to take external arguments"""
 
 __author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'

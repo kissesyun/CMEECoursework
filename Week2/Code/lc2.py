@@ -1,4 +1,4 @@
-#! /user/bin/env python3
+#! /usr/bin/env python3
 
 """Use list comprehensions/loops and control statement to select info in tuples"""
 

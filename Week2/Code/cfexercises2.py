@@ -1,4 +1,4 @@
-#! /user/bin/env python3
+#! /usr/bin/env python3
 """Some functions exemplifying the use of control statements"""
 
 __author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'

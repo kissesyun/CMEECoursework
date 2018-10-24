@@ -1,4 +1,4 @@
-#! /user/bin/env python3
+#! /usr/bin/env python3
 """Check if the input species name matches the specific genus in a csv file.
    So that we know which ones the in the species recording csv belong to the certain genus"""
 
@@ -49,4 +49,3 @@ def main(argv):
     
 if (__name__ == "__main__"):
     status = main(sys.argv)
-

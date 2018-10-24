@@ -1,4 +1,4 @@
-#! /user/bin/env python3
+#! /usr/bin/env python3
 """An updated version of align_seqs.py.
    Align two given DNA sequences, show all the best alignments and their score"""
 

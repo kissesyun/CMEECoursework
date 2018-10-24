@@ -1,0 +1,27 @@
+\documentclass[12pt]{article}
+\title{Autocorrelation in Weather}
+\author{Shiyun Liu}}
+\date{10.2018}
+\begin{document}
+  \maketitle
+  \begin{abstract}
+    Here in this task, we want to answer the question:
+    Are temperatures of one year significantly correlated with the next year (successive years), across years in a given location?
+  \end{abstract}
+  \section{Introduction}
+    The annual mean temperatures in Key West, Florida for the 20th century (100 years), were given in this task.
+    And we can find out whether there is a significant correlation in weather in Key West area during 20th century, by using computational methods and tools to calculate the correlation.
+  \section{Methods}
+    Correlation coefficient between successive years is calculated.
+    And the correlation coefficients of 10000 sets of randomly permuted year sequences (based on the same database) are calculate.
+    The fraction of the correlation coefficients(random) that are greater than that the ordered correlation calculated, would be the approximate p-value
+  \section{Result}
+    The fraction I got is 6e-04. 
+    (The value differs every time we run the script as the ramdomly permuted year sequences are randomly generated.
+     But the order of magnitude is stable, which is e-04.)
+  \section{Discussion}
+    Since the fraction value (P-value) is much smaller than 0.05, we can be at least 95% confident to say that our correlation coefficent is reflecting the true relationship instead of being discovered by chance.
+    So we can draw the conclusion that the temperature of one year are significantly correlated with their successive years across the 20th century in Key West, Florida.
+  \bibliographystyle{plain}
+  \bibliography{}
+\end{document}

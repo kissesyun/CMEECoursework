@@ -1,4 +1,4 @@
-#! /user/bin/env python3
+#! /usr/bin/env python3
 """Print tuples in tuple on separate line"""
 
 __author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'

@@ -1,4 +1,4 @@
-#! /user/bin/env python3
+#! /usr/bin/env python3
 """Use python to populate a dictionary and access tuple in tuple"""
 
 __author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'
@@ -28,7 +28,7 @@ def taxa_dic(x):                    #define a function called taxa_dic
         for info in taxa:
                 if info[1] == x:
                         dic_loops.add(info[0])
-        print(x, dic_loops, sep=': ')
+        print(x, dic_loops, sep = ': ')
 
 def main(argv):
     taxa_dic(sys.argv[1])

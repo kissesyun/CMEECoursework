@@ -1,4 +1,6 @@
 #!/usr/bin/env Rscript
+# Autor: Shiyun Liu s.liu18@imperial.ac.uk
+# Plot lattice graph and calculate mean and median for subsets of dataset
 
 #Clear the workspace and read the dataset
 rm(list=ls())

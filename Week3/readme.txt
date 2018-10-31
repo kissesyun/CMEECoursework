@@ -15,6 +15,11 @@ Program needed to be installed: Rstudio
 .
 ├── Code
 │   ├── CompileLaTeX.sh
+│   ├── DataWrang.R
+│   ├── DataWrangTidy.R
+│   ├── Girko.R
+│   ├── PP_Lattice.R
+│   ├── PP_Regress.R
 │   ├── TAutoCorr.R
 │   ├── TreeHeight.R
 │   ├── Vectorize.R
@@ -31,6 +36,7 @@ Program needed to be installed: Rstudio
 │   ├── get_TreeHeight.R
 │   ├── map.R
 │   ├── next.R
+│   ├── plotLin.R
 │   ├── preallocate.R
 │   ├── run_get_TreeHeight.sh
 │   ├── sample.R
@@ -39,9 +45,18 @@ Program needed to be installed: Rstudio
 │   ├── EcolArchives-E089-51-D1.csv
 │   ├── GPDDFiltered.RData
 │   ├── KeyWestAnnualMeanTemperature.RData
+│   ├── PoundHillData.csv
+│   ├── PoundHillMetaData.csv
 │   └── trees.csv
 ├── Result
+│   ├── Girko.pdf
 │   ├── MyData.csv
+│   ├── MyLinReg.pdf
+│   ├── PP_Regress_Results.csv
+│   ├── PP_Results.csv
+│   ├── Pred_Lattice.pdf
+│   ├── Prey_Lattice.pdf
+│   ├── SizeRatio_Lattice.pdf
 │   ├── TreeHts.csv
 │   ├── correlation_result.pdf
 │   ├── readme.txt
@@ -50,12 +65,13 @@ Program needed to be installed: Rstudio
 │   └── readme.txt
 └── readme.txt
 
+
 1.Data folder:
 Some Rdata files and csv files got from github.
 Used wget or git clone 
 
 2.Code folder:
-Except from the practices .R during python lectures, there are 5 R scripts for practical assessment, 1 tex for LaTex usage and 2 bash scripts.
+Except from the practices .R during python lectures, there are 7 R scripts for practical assessment, 1 tex for LaTex usage and 2 bash scripts.
 (1) TreeHeight.R
 This function calculates heights of trees given distance of each tree from its base and angle to its top, using  the trigonometric formula.
 With internal input and exporting the output to result file.
@@ -67,11 +83,15 @@ Runs the stochastic (with gaussian fluctuations) Ricker Eqn. Vectorized version.
 Analyse the temperature data obtained from 100 years.
 (5) map.R
 Map the Global Population Dynamics Database
-(6) run_get_TreeHeight.sh
+(6) PP_Lattice.R
+Use ggplot to plot a graph of predator-prey mass relationship and do analysis of regression
+(7) PP_Lattice.R
+Plot lattice graph and calculate mean and median for subsets of dataset
+(8) run_get_TreeHeight.sh
 Bash script to run get_TreeHeight.R and external argument.
-(7) CompileLaTeX.sh 
+(9) CompileLaTeX.sh 
 Bash script to run LaTex
-(8) correlation_result.tex
+(10) correlation_result.tex
 Template tex. with content to generate pdf
 
 3.Result folder:

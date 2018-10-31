@@ -1,3 +1,11 @@
+#! /usr/bin/env python3
+"""Practice R Control statement"""
+
+__author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'
+__version__ = '0.0.1'
+
+
+
 for i in range(3, 17):
     print('hello')
 

@@ -1,4 +1,4 @@
-#! /usr/bin/env python3
+#! /user/bin/env python3
 """Use python to populate a dictionary and access tuple in tuple"""
 
 __author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'
@@ -23,17 +23,20 @@ taxa = [ ('Myotis lucifugus','Chiroptera'),
 
 import sys
 
-def taxa_dic(x):                    #define a function called taxa_dic
-        dic_loops = set()
-        for info in taxa:
-                if info[1] == x:
-                        dic_loops.add(info[0])
-        print(x, dic_loops, sep = ': ')
+def taxa_dic(x):       #define a function called taxa_dic
+    """Find the corresponding part of a key word"""
+    dic_loops = set()
+    for info in taxa:
+        if info[1] == x:
+            dic_loops.add(info[0])
+        print(x, dic_loops, sep =': ')
 
 def main(argv):
+    """Main entry point of the program"""
     taxa_dic(sys.argv[1])
     return 0
 
 if (__name__ == "__main__"):
+    """ Makes sure the "main" function is called from command line """
     status = main(sys.argv)
     sys.exit(status)

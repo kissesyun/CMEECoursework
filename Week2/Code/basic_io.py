@@ -1,3 +1,9 @@
+#! /usr/bin/env python3
+"""Open and save a file, also save an object for later use"""
+
+__author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'
+__version__ = '0.0.1'
+
 #############################
 # FILE INPUT
 #############################

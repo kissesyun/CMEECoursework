@@ -49,6 +49,7 @@ def find_all_primes(x=22):
 
 
 def main(argv):
+    """Main entry point of the program"""
     print(even_or_odd(22))
     print(largest_divisor_five(120))
     print(is_prime(60))
@@ -56,6 +57,7 @@ def main(argv):
     return 0
 
 if (__name__ == "__main__"):
+    """ Makes sure the "main" function is called from command line """
     status = main(sys.argv)
     sys.exit(status)
 

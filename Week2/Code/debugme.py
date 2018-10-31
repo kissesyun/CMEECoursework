@@ -6,6 +6,7 @@ __version__ = '0.0.1'
 
 
 def createabug(x):
+    """Create a function to run some testes including bugs"""
     y = x**4
     z = 0.
     y = y/z

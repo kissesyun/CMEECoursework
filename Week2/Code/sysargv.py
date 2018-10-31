@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""Learn about sys package"""
 
 import sys
 print("This is the name of the script: ", sys.argv[0])

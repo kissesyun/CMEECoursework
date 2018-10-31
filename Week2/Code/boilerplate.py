@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+__author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'
+__version__ = '0.0.1'
 
 """ Description of this program or application.
     You can use several lines """

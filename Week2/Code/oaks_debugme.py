@@ -28,6 +28,7 @@ doctest.testmod()
 
     
 def main(argv): 
+    """ Main entry point of the program """
     f = open('../Data/TestOaksData.csv','r')
     g = open('../Result/JustOaksData.csv','w')
     taxa = csv.reader(f)
@@ -48,4 +49,6 @@ def main(argv):
 
     
 if (__name__ == "__main__"):
+     """ Makes sure the "main" function is called from command line """
     status = main(sys.argv)
+    sys.exit(status)

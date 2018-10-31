@@ -1,5 +1,5 @@
 #! /usr/bin/env python3
-"""Some functions exemplifying the use of control statements"""
+"""Doctest practice"""
 
 __author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'
 __version__ = '0.0.1'
@@ -65,6 +65,7 @@ def even_or_odd(x=0):
 
 
 # def main(argv):
+#    """ Main entry point of the program """
 #     print(even_or_odd(22))
 #     print(largest_divisor_five(120))
 #     print(is_prime(60))
@@ -72,6 +73,7 @@ def even_or_odd(x=0):
 #     return 0
 
 # if (__name__ == "__main__"):
+#    """ Makes sure the "main" function is called from command line """
 #     status = main(sys.argv)
 #     sys.exit(status)
 

@@ -1,3 +1,10 @@
+#! /usr/bin/env python3
+"""Read and write data in csv form in R"""
+
+__author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'
+__version__ = '0.0.1'
+
+
 import csv
 
 # Read a file containing:

@@ -52,7 +52,8 @@ coef <- ldply(seta, function(x) {
 )
 
 #calculate the f stats
-fstat = ldply(seta, function(x) { f.statistic = summary(x)$fstatistic[1]
+fstat = ldply(seta, function(x) { 
+f.statistic = summary(x)$fstatistic[1] 
 data.frame(f.statistic)}) 
 
 #combine them together
@@ -61,6 +62,3 @@ total = merge(coef, fstat,  all=T)
 #write the output to csv file
 write.csv(total, file = "../Result/PP_Regress_Results.csv", row.names = F) 
 
-
-
-write.csv(regression, file = "../Results/PP_Regress_Results.csv") # saving

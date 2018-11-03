@@ -7,7 +7,11 @@ rm(list=ls())
 
 #load, examine and plot the data
 load('../Data/KeyWestAnnualMeanTemperature.Rdata')
+
+pdf('../Result/TAutoCorrP.pdf', 11.7, 8.3)
 plot(ats,type='l')
+dev.off()
+
 summary.data.frame(ats)
 
 # Calculate the correlation coefficient by cor(x,y) function

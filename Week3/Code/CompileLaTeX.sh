@@ -3,7 +3,6 @@
 #use latex to generate pdf file based on our tex file and add citation by using .bib file
 pdflatex $1.tex
 pdflatex $1.tex
-bibtex $1.tex
 pdflatex $1.tex
 pdflatex $1.tex
 evince $1.pdf &

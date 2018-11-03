@@ -52,11 +52,13 @@ Program needed to be installed: Rstudio
 │   ├── Girko.pdf
 │   ├── MyData.csv
 │   ├── MyLinReg.pdf
+│   ├── PP_Regress.pdf
 │   ├── PP_Regress_Results.csv
 │   ├── PP_Results.csv
 │   ├── Pred_Lattice.pdf
 │   ├── Prey_Lattice.pdf
 │   ├── SizeRatio_Lattice.pdf
+│   ├── TAutoCorrP.pdf
 │   ├── TreeHts.csv
 │   ├── correlation_result.pdf
 │   ├── readme.txt
@@ -64,7 +66,6 @@ Program needed to be installed: Rstudio
 ├── Sandbox
 │   └── readme.txt
 └── readme.txt
-
 
 1.Data folder:
 Some Rdata files and csv files got from github.

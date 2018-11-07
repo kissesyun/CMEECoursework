@@ -6,7 +6,7 @@ The content is about R
 3. R commands for manipulating data (strsplit, paste) and generating Random Numbers(norm,sample,seed).
 4. Import and export data (write. read.), write and run R code(source and Rscript), define R function and control statements in R.
 5. Vectorization in R (Pre-allocation, apply family)
-5. R packages
+6. R packages
 
 The commands run in Bash or other Unix-based env.
 Program needed to be installed: Rstudio

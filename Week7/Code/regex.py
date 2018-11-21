@@ -1,3 +1,9 @@
+#!/usr/bin/env python3
+""" Practice the regex in python """
+__author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'
+__version__ = '0.0.1'
+
+
 import re
 MyStr = 'an example'
 match = re.search(r'\w*\s', MyStr) # what pattern is this?
@@ -58,7 +64,14 @@ for email in emails:
 
 f = open('../Data/TestOaksData.csv', 'r')
 found_oaks = re.findall(r"Q[\w\s].*\s", f.read())
-
 found_oaks
+for name in found_oaks:
+    print(name.replace(",",""))
 
+MyStr = "Samraat Pawar, s.pawar@imperial.ac.uk, Systems biology and ecological theory; Another academic, a.academic@imperial.ac.uk, Some other stuff thats equally boring; Yet another academic, y.a.academic@imperial.ac.uk, Some other stuff thats even more boring"
+
+found_matches = re.findall(r"([\w\s]+),\s([\w\.-]+@[\w\.-]+)", MyStr)
+found_matches
+for item in found_matches:
+    print(item)
 

@@ -1,7 +1,16 @@
+#!/usr/bin/env python3
+""" Plot the Lotka-Volterra model """
+__author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'
+__version__ = '0.0.1'
+
+
 import scipy as sc
 import scipy.stats
 import scipy.integrate as integrate
+
 def dCR_dt(pops, t=0):
+    """ Returns the growth rate of predator and prey populations at any 
+    given time step """
     R = pops[0]
     C = pops[1]
     dRdt = r * R - a * R * C 
@@ -24,6 +33,7 @@ C0 = 5
 RC0 = sc.array([R0, C0]) 
 
 pops, infodict = integrate.odeint(dCR_dt, RC0, t, full_output=True)
+
 import matplotlib.pylab as p
 
 f1 = p.figure()
@@ -35,7 +45,7 @@ p.legend(loc='best')
 p.xlabel('Time')
 p.ylabel('Population density')
 p.title('Consumer-Resource population dynamics')
-p.show()# To display the figure
+#p.show()# To display the figure
 
 f1.savefig('../Result/LV_model.pdf') #Save figure
 
@@ -45,4 +55,6 @@ p.grid()
 p.xlabel('Resource density')
 p.ylabel('Consumer density')
 p.title('Consumer-Resource population dynamics')
-p.show()
+#p.show()
+f2.savefig('../Result/LV1_model.pdf') #Save figure
+

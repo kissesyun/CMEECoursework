@@ -20,9 +20,6 @@ Program needed to be installed: python3, ipython3; other packages not specifical
 │   ├── MyFirstJupyterNb.ipynb
 │   ├── TestR.R
 │   ├── TestR.py
-│   ├── __pycache__
-│   │   ├── profileme.cpython-36.pyc
-│   │   └── profileme2.cpython-36.pyc
 │   ├── blackbirds.py
 │   ├── fmr.R
 │   ├── profileme.py

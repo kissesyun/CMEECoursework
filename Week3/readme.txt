@@ -34,6 +34,7 @@ Program needed to be installed: Rstudio
 │   ├── control.R
 │   ├── correlation_result.tex
 │   ├── get_TreeHeight.R
+│   ├── get_TreeHeight.py
 │   ├── map.R
 │   ├── next.R
 │   ├── plotLin.R
@@ -72,7 +73,7 @@ Some Rdata files and csv files got from github.
 Used wget or git clone 
 
 2.Code folder:
-Except from the practices .R during python lectures, there are 7 R scripts for practical assessment, 1 tex for LaTex usage and 2 bash scripts.
+Except from the practices .R during python lectures, there are 7 R scripts for practical assessment, 1 tex for LaTex usage, 1 python script and 2 bash scripts.
 (1) TreeHeight.R
 This function calculates heights of trees given distance of each tree from its base and angle to its top, using  the trigonometric formula.
 With internal input and exporting the output to result file.
@@ -88,11 +89,13 @@ Map the Global Population Dynamics Database
 Use ggplot to plot a graph of predator-prey mass relationship and do analysis of regression
 (7) PP_Lattice.R
 Plot lattice graph and calculate mean and median for subsets of dataset
-(8) run_get_TreeHeight.sh
-Bash script to run get_TreeHeight.R and external argument.
-(9) CompileLaTeX.sh 
+(8) get_TreeHeight.py
+This is the python version of get tree height
+(9) run_get_TreeHeight.sh
+Bash script to run get_TreeHeight.R, get_TreeHeight.py and external argument.
+(10) CompileLaTeX.sh 
 Bash script to run LaTex
-(10) correlation_result.tex
+(11) correlation_result.tex
 Template tex. with content to generate pdf
 
 3.Result folder:

@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""This is the python version of get tree height"""
+""" This is the python version of get tree height """
 
 __author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'
 __version__ = '0.0.1'

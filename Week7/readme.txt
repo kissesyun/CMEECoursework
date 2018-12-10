@@ -17,6 +17,8 @@ Program needed to be installed: python3, ipython3; other packages not specifical
 │   ├── DrawFW.py
 │   ├── LV1.py
 │   ├── LV2.py
+│   ├── LV3.py
+│   ├── LV4.py
 │   ├── MyFirstJupyterNb.ipynb
 │   ├── TestR.R
 │   ├── TestR.py
@@ -38,11 +40,15 @@ Program needed to be installed: python3, ipython3; other packages not specifical
 ├── Result
 │   ├── Foodweb.pdf
 │   ├── LV1_model.pdf
+│   ├── LV2_model.pdf
+│   ├── LV3_model.pdf
+│   ├── LV4_model.pdf
 │   ├── LV_model.pdf
 │   ├── TestR.Rout
 │   ├── TestR_errFile.Rout
 │   ├── errorFile.Rout
-│   └── outputFile.Rout
+│   ├── outputFile.Rout
+│   └── readme.txt
 └── readme.txt
 
 
@@ -51,8 +57,8 @@ Some fasta files and csv files got from github.
 Used wget or git clone 
 
 2.Code folder:
-Except from the practices .py during python lectures, there are 7 python scripts for practical assessment.
-(1) LV1.py and lv2.py
+Except from the practices .py during python lectures, there are 9 python scripts for practical assessment.
+(1) LV1.py, lv2.py, LV3.py and LV4.py
 Plot the Lotka-Volterra model
 (2) DrawFW.py
 Draw a foodweb

@@ -9,7 +9,7 @@ import sys
 import scipy as sc
 import scipy.integrate as integrate
 import scipy.stats as stats
-import pylab as p  
+import matplotlib.pylab as p  
 
 
 
@@ -17,46 +17,46 @@ def dR_dt(pops, t=0):
     """ Returns the growth rate of predator and prey populations at any 
     given time step """
 
-    R = pops[0]
-    C = pops[1]
-    K = 15   
-    for i in range(t-1):
-        R[i+1] = R[i] * (1 + (r + stats.norm.rvs(0, 0.1)) * (1 - R[i, 0] / K) - a * C[i])
-        C[i+1] = C[i] * (1 - z + stats.norm.rvs(0, 0.1) + e * a * R[i, 0])
+    # R = pops[0]
+    # C = pops[1]
+    # K = 15   
+    # for i in range(t-1):
+    #     R[i+1] = R[i] * (1 + (r + stats.norm.rvs(0, 0.1)) * (1 - R[i, 0] / K) - a * C[i])
+    #     C[i+1] = C[i] * (1 - z + stats.norm.rvs(0, 0.1) + e * a * R[i, 0])
 
-    return sc.array([R, C])
+    # return sc.array([R, C])
+    RC = sc.zeros((t, 2))  # pre-allocate
+    RC[0, 0] = RC0[0]
+    RC[0, 1] = RC0[1]
+    for i in range(t-1):
+        RC[i+1, 0] = RC[i, 0] * \
+            (1 + (r + stats.norm.rvs(0, 0.1)) *
+             (1 - RC[i, 0] / K) - a * RC[i, 1])
+        RC[i+1, 1] = RC[i, 1] * \
+            (1 - z + stats.norm.rvs(0, 0.1) + e * a * RC[i, 0])
+
+    return RC
+
 
 # Define parameters:
 r = float(sys.argv[1]) 
 a = float(sys.argv[2]) 
 z = float(sys.argv[3]) 
 e = float(sys.argv[4]) 
-
+K = 25
 	
-# define time vector: integrate from 0 to 15, using 1000 points:
-t = sc.linspace(0, 15, 1000)
+# define time vector: 
+t = 100
 
 R0 = 10
 C0 = 5 
 RC0 = sc.array([R0, C0]) 
 
-pops, infodict = integrate.odeint(dR_dt, RC0, t, full_output=True)
-
-
-# define time vector: integrate from 0 to 15, using 1000 points:
-t = sc.linspace(0, 15, 1000)
-
-R0 = 10
-C0 = 5 
-RC0 = sc.array([R0, C0]) 
-
-pops, infodict = integrate.odeint(dR_dt, RC0, t, full_output=True)
-
-#infodict['message'] 
+RC = dR_dt(RC0, t)
 
 f1 = p.figure() 
-p.plot(t, pops[:,0], 'g-', label='Resource density') # Plot
-p.plot(t, pops[:,1]  , 'b-', label='Consumer density')
+p.plot(range(t), RC[:,0], 'g-', label='Resource density') # Plot
+p.plot(range(t), RC[:,1]  , 'b-', label='Consumer density')
 p.grid()
 p.legend(loc='best')
 p.xlabel('Time')

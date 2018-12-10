@@ -1,4 +1,4 @@
-#! /usr/bin/env Rscript
+#!/usr/bin/env Rscript
 # Autor: Shiyun Liu s.liu18@imperial.ac.uk
 # Some code exemplifying control flow constructs in R 
 

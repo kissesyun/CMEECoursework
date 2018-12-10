@@ -20,5 +20,4 @@ rm *.toc
 rm *.bbl
 rm *.blg
 
-## move the result to Result folder
-mv $1.pdf ../Result/
+

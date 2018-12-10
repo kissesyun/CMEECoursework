@@ -1,4 +1,4 @@
-#! /usr/bin/env Rscript
+#!/usr/bin/env Rscript
 # Autor: Shiyun Liu s.liu18@imperial.ac.uk
 
 # This function calculates heights of trees given distance of each tree from its base and angle to its top, using  the trigonometric formula 

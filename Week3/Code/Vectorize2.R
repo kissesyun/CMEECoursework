@@ -1,4 +1,4 @@
-#! /usr/bin/env Rscript
+#!/usr/bin/env Rscript
 # Autor: Shiyun Liu s.liu18@imperial.ac.uk
 # Runs the stochastic (with gaussian fluctuations) Ricker Eqn .
 

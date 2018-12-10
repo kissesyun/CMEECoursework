@@ -1,4 +1,4 @@
-#! /usr/bin/env Rscript
+#!/usr/bin/env Rscript
 # Autor: Shiyun Liu s.liu18@imperial.ac.uk
 # Analyse the temperature data obtained from 100 years 
 

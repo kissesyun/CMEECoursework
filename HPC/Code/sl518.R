@@ -1,12 +1,13 @@
 #!/usr/bin/env Rscript
+#Author: Shiyun Liu  s.liu.18@imperial.ac.uk
 
 #clear the space
 rm(list=ls())
 graphics.off()
 
+################################Neutral theory simulations
 #store the simulated system
 #community <- c(1,4,4,5,1,6,1)
-
 ###Q1
 #define function to know the species richness
 species_richness <- function(community){
@@ -23,7 +24,6 @@ species_richness <- function(community){
 initialise_max <- function(size){
   seq(size)
 }
-
 initialise_min <- function(size){
   rep(1,size)
 }
@@ -201,6 +201,7 @@ question_16 <- function(){
 }
 #try again for initialise_min(100)
 
+###Challenge A
 challenge_A <- function(){
   comm1 = initialise_max(100)
   comm2 = initialise_min(100)
@@ -213,7 +214,6 @@ challenge_A <- function(){
     rich1_total = rbind(rich1_total,rich1)
     rich2_total = rbind(rich2_total,rich2)
   }
-  
   #calcualte the standard deviations and averages
   avg1 = colSums(rich1_total)/100
   avg2 = colSums(rich2_total)/100
@@ -239,11 +239,12 @@ challenge_A <- function(){
   dev.off()
 }
 
-
+###########################HPC SIMULATION
 ###Q17 and Q18 on a separate R code file
 ###Q19 on a spearate bash script
 #The zip file containing all the output file and scripts used to produced it can be found in Result folder
 
+##########################Fractals
 ###Q20
 #extract the output file to get a set of average abundence octaves for 100 iteration
 aver_oct_set = c()
@@ -283,7 +284,8 @@ size500_aver = size500/(length(aver_oct_set)/4)
 size1000_aver = size1000/(length(aver_oct_set)/4)
 size2500_aver = size2500/(length(aver_oct_set)/4)
 size5000_aver = size5000/(length(aver_oct_set)/4)
-  
+
+#plot the graph 
 pdf(file="../Result/Q20Plot.pdf")
 #omo adjust the boundary of the image, c(bottom, left, top, right)
 par(mfrow = c(2,2), oma=c(0,0,2,0))
@@ -303,7 +305,7 @@ barplot(size5000_aver,
 title("Distribution of average species abundance",outer=TRUE)
 dev.off()
 
-###challenge C
+###Challenge C
 challenge_C <- function(){
   time_series_500 = c(0)
   time_series_1000 = c(0)
@@ -332,7 +334,7 @@ challenge_C <- function(){
   aver_time_series_5000 = time_series_5000/(iter/4)
   
   pdf(file = "../Result/challengeC.pdf") 
-  plot(c(0,(8*5000)), c(0,100), type = "n",
+  plot(NA, xlim = c(0,8*5000), ylim = c(0,100),
        xlab = "Generation", ylab = "Species Richness",
        main = "Average species richness over time")
   lines(seq(0,(8*500)), aver_time_series_500[1:(8*500+1)], col = "red")
@@ -344,8 +346,6 @@ challenge_C <- function(){
   dev.off()
 }
   
-
-
 ###Q21
 #Fractal dimension D can be calculated by log(N)/log(r), whereas N is the dividing factor and r is the scaling factor.
 #For the first object, N is 8 (area is 8 times bigger), r is 3 (length is 3 times larger), therefore D = log(8)/log(3) = 1.89
@@ -375,7 +375,7 @@ chaos_game = function(){
   dev.off()
 }
 
-#Challenge question E
+#Challenge E
 
 #try with different start point and color different steps
 graphics.off()
@@ -415,7 +415,7 @@ for (i in 301:1000){
 dev.off()
 #The start point seems not to influence the pattern generated eventually.
 
-#classic Sierpinski Gasket
+#Classic Sierpinski Gasket
 graphics.off()
 A = c(0,0)
 B = c(2,sqrt(12))
@@ -462,7 +462,6 @@ elbow = function(start, direction, distance){
 plot(NA, xlim=c(0,10), ylim=c(0,10),xlab="X", ylab="Y")
 elbow(c(1,1),pi/2,2)
 graphics.off()
-
 
 ###Q25
 #an iterative function that draws a spiral

@@ -242,6 +242,7 @@ challenge_A <- function(){
 
 ###Q17 and Q18 on a separate R code file
 ###Q19 on a spearate bash script
+#The zip file containing all the output file and scripts used to produced it can be found in Result folder
 
 ###Q20
 #extract the output file to get a set of average abundence octaves for 100 iteration

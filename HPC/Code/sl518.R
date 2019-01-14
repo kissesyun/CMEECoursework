@@ -303,6 +303,48 @@ barplot(size5000_aver,
 title("Distribution of average species abundance",outer=TRUE)
 dev.off()
 
+###challenge C
+challenge_C <- function(){
+  time_series_500 = c(0)
+  time_series_1000 = c(0)
+  time_series_2500 = c(0)
+  time_series_5000 = c(0)
+  
+  for (i in (1:100)){
+    file = paste("../Result/HPC/sl518_cluster_",i,".rda",sep = "")
+    load(file)
+    if(i%%4==1){
+      time_series_500 = sum_vect(time_series_500, richness)
+    }
+    else if(i%%4==2){
+      time_series_1000 = sum_vect(time_series_1000, richness)
+    }
+    else if(i%%4==3){
+      time_series_2500 = sum_vect(time_series_2500, richness)
+    }
+    else if(i%%4==0){
+      time_series_5000 = sum_vect(time_series_5000, richness)
+    }
+  }
+  aver_time_series_500 = time_series_500/(iter/4)
+  aver_time_series_1000 = time_series_1000/(iter/4)
+  aver_time_series_2500 = time_series_2500/(iter/4)
+  aver_time_series_5000 = time_series_5000/(iter/4)
+  
+  pdf(file = "../Result/challengeC.pdf") 
+  plot(c(0,(8*5000)), c(0,100), type = "n",
+       xlab = "Generation", ylab = "Species Richness",
+       main = "Average species richness over time")
+  lines(seq(0,(8*500)), aver_time_series_500[1:(8*500+1)], col = "red")
+  lines(seq(0,(8*1000)), aver_time_series_1000[1:(8*1000+1)], col = "blue")
+  lines(seq(0,(8*2500)), aver_time_series_2500[1:(8*2500+1)], col = "orange")
+  lines(seq(0,(8*5000)), aver_time_series_5000[1:(8*5000+1)], col = "green")
+  legend("topright", title = "Community Size", c("500", "1000", "2500", "5000"),
+         lty=1, col = c("red", "blue", "orange", "green"))
+  dev.off()
+}
+  
+
 
 ###Q21
 #Fractal dimension D can be calculated by log(N)/log(r), whereas N is the dividing factor and r is the scaling factor.

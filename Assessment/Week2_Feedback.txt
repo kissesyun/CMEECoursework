@@ -9,11 +9,11 @@ Note that:
 
 ======================================================================
 ======================================================================
-Your Git repo size this week is about 3.10 MiB on disk 
+Your Git repo size this week is about 84.25 MiB on disk 
 
 PART 1: Checking project workflow...
 
-Found the following directories in parent directory: Week1, Assessment, Week2, .git, Week3
+Found the following directories in parent directory: Week6, Week1, Week7, Assessment, MResProject, Week8, Week5, Week2, Week4, .git, Week3
 
 Found the following files in parent directory: README.txt, .gitignore
 
@@ -33,6 +33,11 @@ Printing contents of .gitignore:
 .Rhistory
 /Week2/Result/**
 /Week3/Result/**
+/Week4/Result/**
+/Week6/Result/**
+/Week7/Result/**
+/Week7/Code/__pycache__/**
+.ipynb_checkpoints
 **********************************************************************
 
 Found README in parent directory, named: README.txt
@@ -47,7 +52,7 @@ Contact address: s.liu18@imperial.ac.uk
 ======================================================================
 Looking for the weekly directories...
 
-Found 3 weekly directories: Week1, Week2, Week3
+Found 8 weekly directories: Week1, Week2, Week3, Week4, Week5, Week6, Week7, Week8
 
 The Week2 directory will be assessed 
 
@@ -168,7 +173,7 @@ Inspecting script file lc2.py...
 
 File contents are:
 **********************************************************************
-#! /user/bin/env python3
+#! /usr/bin/env python3
 
 """Use list comprehensions/loops and control statement to select info in tuples"""
 
@@ -242,23 +247,25 @@ Found one or more doctrings!
 Output (only first 500 characters): 
 
 **********************************************************************
-('rainfall greater than 100mm', set([('JAN', 111.4), ('AUG', 140.2), ('DEC', 142.2), ('FEB', 126.1), ('NOV', 128.4)]))
-('rainfall less than 50mm', set([('SEP', 27.0), ('MAR', 49.9)]))
-set([('JAN', 111.4), ('AUG', 140.2), ('DEC', 142.2), ('FEB', 126.1), ('NOV', 128.4)])
-set([('SEP', 27.0), ('MAR', 49.9)])
+rainfall greater than 100mm {('NOV', 128.4), ('DEC', 142.2), ('JAN', 111.4), ('AUG', 140.2), ('FEB', 126.1)}
+rainfall less than 50mm {('MAR', 49.9), ('SEP', 27.0)}
+{('NOV', 128.4), ('DEC', 142.2), ('JAN', 111.4), ('AUG', 140.2), ('FEB', 126.1)}
+{('MAR', 49.9), ('SEP', 27.0)}
 
 **********************************************************************
 
 Code ran without errors
 
-Time consumed = 0.01424s
+Time consumed = 0.02927s
 
 ======================================================================
 Inspecting script file boilerplate.py...
 
 File contents are:
 **********************************************************************
-#!/user/bin/env python3
+#!/usr/bin/env python3
+__author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'
+__version__ = '0.0.1'
 
 """ Description of this program or application.
     You can use several lines """
@@ -306,13 +313,20 @@ This is a boilerplate
 
 Code ran without errors
 
-Time consumed = 0.01501s
+Time consumed = 0.03167s
 
 ======================================================================
 Inspecting script file basic_csv.py...
 
 File contents are:
 **********************************************************************
+#! /usr/bin/env python3
+"""Read and write data in csv form in R"""
+
+__author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'
+__version__ = '0.0.1'
+
+
 import csv
 
 # Read a file containing:
@@ -347,35 +361,32 @@ Testing basic_csv.py...
 basic_csv.py is a Python script file;
  checking for docstrings...
 
-Found no doctrings!
-1 pt deducted
-
-Current Points = 99
+Found one or more doctrings!
 
 Output (only first 500 characters): 
 
 **********************************************************************
 ['Species', 'Infraorder', 'Family', 'Distribution', 'Body mass male (Kg)']
-('The species is', 'Species')
+The species is Species
 ['Daubentonia_madagascariensis', 'Chiromyiformes ', 'Daubentoniidae', 'Madagascar', '2.7']
-('The species is', 'Daubentonia_madagascariensis')
+The species is Daubentonia_madagascariensis
 ['Allocebus_trichotis', 'Lemuriformes', 'Cheirogaleidae', 'Madagascar', '0.1']
-('The species is', 'Allocebus_trichotis')
+The species is Allocebus_trichotis
 ['Avahi_laniger', 'Lemuriformes', 'Indridae', 'America', '1.03']
-('The species is', 'Avahi_laniger')
-['Avahi_occidentalis', 'Lemurifo
+The species is Avahi_laniger
+['Avahi_occidentalis', 'Lemuriformes', 'Indridae', 'Madagasc
 **********************************************************************
 
 Code ran without errors
 
-Time consumed = 0.01575s
+Time consumed = 0.02909s
 
 ======================================================================
 Inspecting script file cfexercises2.py...
 
 File contents are:
 **********************************************************************
-#! /user/bin/env python3
+#! /usr/bin/env python3
 """Some functions exemplifying the use of control statements"""
 
 __author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'
@@ -388,7 +399,7 @@ import doctest
 
 ###Calculate square root of x
 def foo1(x):
-    # """Calculate square root of x
+    """Calculate square root of x"""
     # >>> foo1(4)
     # 2.0
     # >>> foo1(25)
@@ -401,12 +412,14 @@ def foo1(x):
 
 ###Choose the larger number in x and y
 def foo2(x, y):
+    """Choose the larger number in x and y"""
     if x > y:
         return x
     return y
 
 ###Order number x,y,z from small to big
 def foo3(x, y, z):
+    """Order number x,y,z from small to big"""
     if x > y:
         tmp = y
         y = x
@@ -419,6 +432,7 @@ def foo3(x, y, z):
 
 ###Calculate x!
 def foo4(x):
+    """Calculate x!"""
     result = 1
     for i in range(1, x + 1):
         result = result * i
@@ -426,11 +440,13 @@ def foo4(x):
 
 ###Calculate x!
 def foo5(x): # a recursive function
+    """Calculate x!"""
     if x == 1:
         return 1
     return x * foo5(x - 1)
 
 def main(argv):
+    """Main entry point of the program """
     print(foo1(9))
     print(foo2(4,5))
     print(foo3(2,3,4))
@@ -439,6 +455,7 @@ def main(argv):
     return 0
 
 if (__name__ == "__main__"):
+    """ Makes sure the "main" function is called from command line """
     status = main(sys.argv)
     sys.exit(status)
 
@@ -450,11 +467,6 @@ cfexercises2.py is a Python script file;
  checking for docstrings...
 
 Found one or more doctrings!
-
-Missing docstrings in one more functions!
-.5 pt deducted per missing docstring
-
-Current Points = 92.0
 
 Output (only first 500 characters): 
 
@@ -469,14 +481,14 @@ Output (only first 500 characters):
 
 Code ran without errors
 
-Time consumed = 0.03746s
+Time consumed = 0.06373s
 
 ======================================================================
 Inspecting script file align_seqs_better.py...
 
 File contents are:
 **********************************************************************
-#! /user/bin/env python3
+#! /usr/bin/env python3
 """An updated version of align_seqs.py.
    Align two given DNA sequences, show all the best alignments and their score"""
 
@@ -514,6 +526,7 @@ else:
 # A function that computes a score by returning the number of matches starting
 # from arbitrary startpoint (chosen by user)
 def calculate_score(s1, s2, l1, l2, startpoint):
+    """Calculate the alignment score for s1 and s2"""
     matched = "" # to hold string displaying alignements
     score = 0
     for i in range(l2):
@@ -637,7 +650,7 @@ ATCGCCGG
 
 Code ran without errors
 
-Time consumed = 0.01479s
+Time consumed = 0.03205s
 
 ======================================================================
 Inspecting script file dictionary.py...
@@ -669,18 +682,21 @@ taxa = [ ('Myotis lucifugus','Chiroptera'),
 
 import sys
 
-def taxa_dic(x):                    #define a function called taxa_dic
-        dic_loops = set()
-        for info in taxa:
-                if info[1] == x:
-                        dic_loops.add(info[0])
-        print(x, dic_loops, sep=': ')
+def taxa_dic(x):       #define a function called taxa_dic
+    """Find the corresponding part of a key word"""
+    dic_loops = set()
+    for info in taxa:
+        if info[1] == x:
+            dic_loops.add(info[0])
+        print(x, dic_loops, sep =': ')
 
 def main(argv):
+    """Main entry point of the program"""
     taxa_dic(sys.argv[1])
     return 0
 
 if (__name__ == "__main__"):
+    """ Makes sure the "main" function is called from command line """
     status = main(sys.argv)
     sys.exit(status)**********************************************************************
 
@@ -698,17 +714,19 @@ Output (only first 500 characters):
 **********************************************************************
 
 Encountered error:
-  File "dictionary.py", line 31
-    print(x, dic_loops, sep=': ')
-                           ^
-SyntaxError: invalid syntax
+Traceback (most recent call last):
+  File "dictionary.py", line 41, in <module>
+    status = main(sys.argv)
+  File "dictionary.py", line 36, in main
+    taxa_dic(sys.argv[1])
+IndexError: list index out of range
 
 ======================================================================
 Inspecting script file debugme.py...
 
 File contents are:
 **********************************************************************
-#! /user/bin/env python3
+#! /usr/bin/env python3
 """try debug function"""
 __author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'
 __version__ = '0.0.1'
@@ -716,6 +734,7 @@ __version__ = '0.0.1'
 
 
 def createabug(x):
+    """Create a function to run some testes including bugs"""
     y = x**4
     z = 0.
     y = y/z
@@ -739,9 +758,9 @@ Output (only first 500 characters):
 
 Encountered error:
 Traceback (most recent call last):
-  File "debugme.py", line 14, in <module>
+  File "debugme.py", line 15, in <module>
     createabug(25)
-  File "debugme.py", line 11, in createabug
+  File "debugme.py", line 12, in createabug
     y = y/z
 ZeroDivisionError: float division by zero
 
@@ -750,10 +769,19 @@ Inspecting script file scope.py...
 
 File contents are:
 **********************************************************************
+#! /usr/bin/env python3
+"""Learn about global and local variables"""
+
+__author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'
+__version__ = '0.0.1'
+
+
+
 ###try this
 _a_global = 10
 
 def a_function():
+    """To define local variables"""
     _a_global = 5
     _a_local = 4
     print("Inside the function, the value is", _a_global)
@@ -769,6 +797,7 @@ print("Outside the function, the value is", _a_global)
 _a_global = 10
 
 def a_function():
+    """To define a global variable"""
     global _a_global
     _a_global = 5
     _a_local = 4
@@ -785,32 +814,37 @@ Testing scope.py...
 scope.py is a Python script file;
  checking for docstrings...
 
-Found no doctrings!
-1 pt deducted
-
-Current Points = 91.0
+Found one or more doctrings!
 
 Output (only first 500 characters): 
 
 **********************************************************************
-('Inside the function, the value is', 5)
-('Inside the function, the value is', 4)
-('Outside the function, the value is', 10)
-('Inside the function, the value is ', 5)
-('Inside the function, the value is ', 4)
-('Outside the function, the value is', 5)
+Inside the function, the value is 5
+Inside the function, the value is 4
+Outside the function, the value is 10
+Inside the function, the value is  5
+Inside the function, the value is  4
+Outside the function, the value is 5
 
 **********************************************************************
 
 Code ran without errors
 
-Time consumed = 0.01431s
+Time consumed = 0.02880s
 
 ======================================================================
 Inspecting script file cfexercises1.py...
 
 File contents are:
 **********************************************************************
+#! /usr/bin/env python3
+"""Practice R Control statement"""
+
+__author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'
+__version__ = '0.0.1'
+
+
+
 for i in range(3, 17):
     print('hello')
 
@@ -843,10 +877,7 @@ Testing cfexercises1.py...
 cfexercises1.py is a Python script file;
  checking for docstrings...
 
-Found no doctrings!
-1 pt deducted
-
-Current Points = 90.0
+Found one or more doctrings!
 
 Output (only first 500 characters): 
 
@@ -892,14 +923,14 @@ hello
 
 Code ran without errors
 
-Time consumed = 0.01433s
+Time consumed = 0.02796s
 
 ======================================================================
 Inspecting script file tuple.py...
 
 File contents are:
 **********************************************************************
-#! /user/bin/env python3
+#! /usr/bin/env python3
 """Print tuples in tuple on separate line"""
 
 __author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'
@@ -946,13 +977,19 @@ Output (only first 500 characters):
 
 Code ran without errors
 
-Time consumed = 0.01517s
+Time consumed = 0.03223s
 
 ======================================================================
 Inspecting script file basic_io.py...
 
 File contents are:
 **********************************************************************
+#! /usr/bin/env python3
+"""Open and save a file, also save an object for later use"""
+
+__author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'
+__version__ = '0.0.1'
+
 #############################
 # FILE INPUT
 #############################
@@ -1009,10 +1046,7 @@ Testing basic_io.py...
 basic_io.py is a Python script file;
  checking for docstrings...
 
-Found no doctrings!
-1 pt deducted
-
-Current Points = 89.0
+Found one or more doctrings!
 
 Output (only first 500 characters): 
 
@@ -1043,14 +1077,14 @@ Fourth Line
 
 Code ran without errors
 
-Time consumed = 0.01743s
+Time consumed = 0.03012s
 
 ======================================================================
 Inspecting script file lc1.py...
 
 File contents are:
 **********************************************************************
-#! /user/bin/env python3
+#! /usr/bin/env python3
 
 """Use list comprehensions/loops and control statement to select info in tuples"""
 
@@ -1109,23 +1143,24 @@ Found one or more doctrings!
 Output (only first 500 characters): 
 
 **********************************************************************
-('latin names are', set(['Junco hyemalis', 'Passerculus sandwichensis', 'Junco phaeonotus', 'Tachycineata bicolor', 'Delichon urbica']))
-('common names are', set(['Savannah sparrow', 'House martin', 'Dark-eyed junco', 'Yellow-eyed junco', 'Tree swallow']))
-('mean body mass are', set([19.5, 20.2, 19, 18.7, 19.6]))
-set(['Junco hyemalis', 'Passerculus sandwichensis', 'Junco phaeonotus', 'Tachycineata bicolor', 'Delichon urbica'])
-set(['Savannah sparrow', 'House martin', 'Dark-eyed junco', 'Yellow-ey
+latin names are {'Tachycineata bicolor', 'Delichon urbica', 'Junco phaeonotus', 'Passerculus sandwichensis', 'Junco hyemalis'}
+common names are {'Dark-eyed junco', 'Yellow-eyed junco', 'Savannah sparrow', 'Tree swallow', 'House martin'}
+mean body mass are {19.5, 19.6, 18.7, 19, 20.2}
+{'Tachycineata bicolor', 'Delichon urbica', 'Junco phaeonotus', 'Passerculus sandwichensis', 'Junco hyemalis'}
+{'Dark-eyed junco', 'Yellow-eyed junco', 'Savannah sparrow', 'Tree swallow', 'House martin'}
+{19.5, 19.6,
 **********************************************************************
 
 Code ran without errors
 
-Time consumed = 0.01364s
+Time consumed = 0.02923s
 
 ======================================================================
 Inspecting script file oaks_debugme.py...
 
 File contents are:
 **********************************************************************
-#! /user/bin/env python3
+#!/usr/bin/env python3
 """Check if the input species name matches the specific genus in a csv file.
    So that we know which ones the in the species recording csv belong to the certain genus"""
 
@@ -1155,6 +1190,7 @@ doctest.testmod()
 
     
 def main(argv): 
+    """ Main entry point of the program """
     f = open('../Data/TestOaksData.csv','r')
     g = open('../Result/JustOaksData.csv','w')
     taxa = csv.reader(f)
@@ -1175,8 +1211,9 @@ def main(argv):
 
     
 if (__name__ == "__main__"):
+     """ Makes sure the "main" function is called from command line """
     status = main(sys.argv)
-
+    sys.exit(status)
 **********************************************************************
 
 Testing oaks_debugme.py...
@@ -1189,44 +1226,27 @@ Found one or more doctrings!
 Output (only first 500 characters): 
 
 **********************************************************************
-['Quercus', ' robur']
-The genus is: 
-Quercus
-
-FOUND AN OAK!
-
-['Fraxinus', ' excelsior']
-The genus is: 
-Fraxinus
-
-['Pinus', ' sylvestris']
-The genus is: 
-Pinus
-
-['Quercus', ' cerris']
-The genus is: 
-Quercus
-
-FOUND AN OAK!
-
-['Quercus', ' petraea']
-The genus is: 
-Quercus
-
-FOUND AN OAK!
-
 
 **********************************************************************
 
-Code ran without errors
-
-Time consumed = 0.30414s
+Encountered error:
+  File "oaks_debugme.py", line 53
+    status = main(sys.argv)
+                          ^
+IndentationError: unindent does not match any outer indentation level
 
 ======================================================================
 Inspecting script file loops.py...
 
 File contents are:
 **********************************************************************
+#! /usr/bin/env python3
+"""Practice loops in R"""
+
+__author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'
+__version__ = '0.0.1'
+
+
 # FOR loops in Python
 for i in range(5):
     print(i)
@@ -1257,10 +1277,7 @@ Testing loops.py...
 loops.py is a Python script file;
  checking for docstrings...
 
-Found no doctrings!
-1 pt deducted
-
-Current Points = 88.0
+Found one or more doctrings!
 
 Output (only first 500 characters): 
 
@@ -1389,17 +1406,23 @@ GERONIMO! infinite loop! ctrl+c
 
 Code ran without errors
 
-Time consumed = 10.61577s
+Time consumed = 10.26547s
 
 ======================================================================
 Inspecting script file using_name.py...
 
 File contents are:
 **********************************************************************
-#!/usr/bin/env python3
+#! /usr/bin/env python3
+"""Use of main function"""
+
+__author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'
+__version__ = '0.0.1'
+
 # Filename: using_name.py
 
 if __name__ == '__main__':
+    """ Makes sure the "main" function is called from command line """
     print('This program is being run by itself')
 else:
     print('I am being imported from another module')
@@ -1410,10 +1433,7 @@ Testing using_name.py...
 using_name.py is a Python script file;
  checking for docstrings...
 
-Found no doctrings!
-1 pt deducted
-
-Current Points = 87.0
+Found one or more doctrings!
 
 Output (only first 500 characters): 
 
@@ -1424,14 +1444,14 @@ This program is being run by itself
 
 Code ran without errors
 
-Time consumed = 0.08598s
+Time consumed = 0.07000s
 
 ======================================================================
 Inspecting script file align_seqs.py...
 
 File contents are:
 **********************************************************************
-#! /user/bin/env python3
+#! /usr/bin/env python3
 """Align two given DNA sequences, show the best alignment and score"""
 
 __author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'
@@ -1467,6 +1487,7 @@ else:
 # A function that computes a score by returning the number of matches starting
 # from arbitrary startpoint (chosen by user)
 def calculate_score(s1, s2, l1, l2, startpoint):
+    """Calculate the alignment score for s1 and s2"""
     matched = "" # to hold string displaying alignements
     score = 0
     for i in range(l2):
@@ -1586,7 +1607,7 @@ ATCGCCGG
 
 Code ran without errors
 
-Time consumed = 0.05463s
+Time consumed = 0.05519s
 
 ======================================================================
 Inspecting script file sysargv.py...
@@ -1594,6 +1615,7 @@ Inspecting script file sysargv.py...
 File contents are:
 **********************************************************************
 #!/usr/bin/env python3
+"""Learn about sys package"""
 
 import sys
 print("This is the name of the script: ", sys.argv[0])
@@ -1606,30 +1628,27 @@ Testing sysargv.py...
 sysargv.py is a Python script file;
  checking for docstrings...
 
-Found no doctrings!
-1 pt deducted
-
-Current Points = 86.0
+Found one or more doctrings!
 
 Output (only first 500 characters): 
 
 **********************************************************************
-('This is the name of the script: ', 'sysargv.py')
-('Number of arguments: ', 1)
-('The arguments are: ', "['sysargv.py']")
+This is the name of the script:  sysargv.py
+Number of arguments:  1
+The arguments are:  ['sysargv.py']
 
 **********************************************************************
 
 Code ran without errors
 
-Time consumed = 0.01381s
+Time consumed = 0.06634s
 
 ======================================================================
 Inspecting script file align_seqs_fasta.py...
 
 File contents are:
 **********************************************************************
-#! /user/bin/env python3
+#! /usr/bin/env python3
 """Align two DNA sequences, show the best alignment and score. Need to take external arguments"""
 
 __author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'
@@ -1667,6 +1686,7 @@ else:
 # A function that computes a score by returning the number of matches starting
 # from arbitrary startpoint (chosen by user)
 def calculate_score(s1, s2, l1, l2, startpoint):
+    """Calculate the alignment score for s1 and s2"""
     matched = "" # to hold string displaying alignements
     score = 0
     for i in range(l2):
@@ -1748,7 +1768,7 @@ Inspecting script file control_flow.py...
 
 File contents are:
 **********************************************************************
-#! /user/bin/env python3
+#! /usr/bin/env python3
 """Some functions exemplifying the use of control statements"""
 
 __author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'
@@ -1799,6 +1819,7 @@ def find_all_primes(x=22):
 
 
 def main(argv):
+    """Main entry point of the program"""
     print(even_or_odd(22))
     print(largest_divisor_five(120))
     print(is_prime(60))
@@ -1806,6 +1827,7 @@ def main(argv):
     return 0
 
 if (__name__ == "__main__"):
+    """ Makes sure the "main" function is called from command line """
     status = main(sys.argv)
     sys.exit(status)
 
@@ -1846,15 +1868,15 @@ False
 
 Code ran without errors
 
-Time consumed = 0.01619s
+Time consumed = 0.03050s
 
 ======================================================================
 Inspecting script file test_control_flow.py...
 
 File contents are:
 **********************************************************************
-#! /user/bin/env python3
-"""Some functions exemplifying the use of control statements"""
+#! /usr/bin/env python3
+"""Doctest practice"""
 
 __author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'
 __version__ = '0.0.1'
@@ -1920,6 +1942,7 @@ def even_or_odd(x=0):
 
 
 # def main(argv):
+#    """ Main entry point of the program """
 #     print(even_or_odd(22))
 #     print(largest_divisor_five(120))
 #     print(is_prime(60))
@@ -1927,6 +1950,7 @@ def even_or_odd(x=0):
 #     return 0
 
 # if (__name__ == "__main__"):
+#    """ Makes sure the "main" function is called from command line """
 #     status = main(sys.argv)
 #     sys.exit(status)
 
@@ -1948,19 +1972,19 @@ Output (only first 500 characters):
 
 Code ran without errors
 
-Time consumed = 0.05101s
+Time consumed = 0.06286s
 
 ======================================================================
 ======================================================================
 Finished running scripts
 
-Ran into 3 errors
+Ran into 4 errors
 
 ======================================================================
 ======================================================================
 
 FINISHED WEEKLY ASSESSMENT
 
-Current Points for the Week = 86.0
+Current Points for the Week = 100
 
 NOTE THAT THESE ARE POINTS, NOT MARKS FOR THE WEEK!

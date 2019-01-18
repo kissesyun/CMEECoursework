@@ -9,11 +9,11 @@ Note that:
 
 ======================================================================
 ======================================================================
-Your Git repo size this week is about 3.47 MiB on disk 
+Your Git repo size this week is about 84.25 MiB on disk 
 
 PART 1: Checking project workflow...
 
-Found the following directories in parent directory: Week1, Assessment, Week2, .git, Week3
+Found the following directories in parent directory: Week6, Week1, Week7, Assessment, MResProject, Week8, Week5, Week2, Week4, .git, Week3
 
 Found the following files in parent directory: README.txt, .gitignore
 
@@ -33,6 +33,11 @@ Printing contents of .gitignore:
 .Rhistory
 /Week2/Result/**
 /Week3/Result/**
+/Week4/Result/**
+/Week6/Result/**
+/Week7/Result/**
+/Week7/Code/__pycache__/**
+.ipynb_checkpoints
 **********************************************************************
 
 Found README in parent directory, named: README.txt
@@ -47,7 +52,7 @@ Contact address: s.liu18@imperial.ac.uk
 ======================================================================
 Looking for the weekly directories...
 
-Found 3 weekly directories: Week1, Week2, Week3
+Found 8 weekly directories: Week1, Week2, Week3, Week4, Week5, Week6, Week7, Week8
 
 The Week3 directory will be assessed 
 
@@ -76,7 +81,7 @@ The content is about R
 3. R commands for manipulating data (strsplit, paste) and generating Random Numbers(norm,sample,seed).
 4. Import and export data (write. read.), write and run R code(source and Rscript), define R function and control statements in R.
 5. Vectorization in R (Pre-allocation, apply family)
-5. R packages
+6. R packages
 
 The commands run in Bash or other Unix-based env.
 Program needed to be installed: Rstudio
@@ -104,6 +109,7 @@ Program needed to be installed: Rstudio
 │   ├── control.R
 │   ├── correlation_result.tex
 │   ├── get_TreeHeight.R
+│   ├── get_TreeHeight.py
 │   ├── map.R
 │   ├── next.R
 │   ├── plotLin.R
@@ -142,7 +148,7 @@ Some Rdata files and csv files got from github.
 Used wget or git clone 
 
 2.Code folder:
-Except from the practices .R during python lectures, there are 7 R scripts for practical assessment, 1 tex for LaTex usage and 2 bash scripts.
+Except from the practices .R during python lectures, there are 7 R scripts for practical assessment, 1 tex for LaTex usage, 1 python script and 2 bash scripts.
 (1) TreeHeight.R
 This function calculates heights of trees given distance of each tree from its base and angle to its top, using  the trigonometric formula.
 With internal input and exporting the output to result file.
@@ -158,11 +164,13 @@ Map the Global Population Dynamics Database
 Use ggplot to plot a graph of predator-prey mass relationship and do analysis of regression
 (7) PP_Lattice.R
 Plot lattice graph and calculate mean and median for subsets of dataset
-(8) run_get_TreeHeight.sh
-Bash script to run get_TreeHeight.R and external argument.
-(9) CompileLaTeX.sh 
+(8) get_TreeHeight.py
+This is the python version of get tree height
+(9) run_get_TreeHeight.sh
+Bash script to run get_TreeHeight.R, get_TreeHeight.py and external argument.
+(10) CompileLaTeX.sh 
 Bash script to run LaTex
-(10) correlation_result.tex
+(11) correlation_result.tex
 Template tex. with content to generate pdf
 
 3.Result folder:
@@ -174,8 +182,10 @@ Where simple practical test files can go.
 Thanks for reading me! I hope you or myself later on find it helpful~
 **********************************************************************
 
-Found following files in results directory: readme.txt...
-Found 27 code files: PP_Regress.R, apply1.R, sample.R, Vectorize.R, run_get_TreeHeight.sh, CompileLaTeX.sh, boilerplate.R, TreeHeight.R, PP_Lattice.R, next.R, Girko.R, Vectorize1.R, break.R, plotLin.R, basic_io.R, correlation_result.tex, try.R, apply2.R, get_TreeHeight.R, TAutoCorr.R, browser.R, Vectorize2.R, DataWrangTidy.R, preallocate.R, DataWrang.R, map.R, control.R
+Found following files in results directory: TreeHts.csv, PP_Results.csv, PP_Regress_Results.csv, PP_Regress.pdf, trees_treeheights.csv, Pred_Lattice.pdf, Prey_Lattice.pdf, readme.txt, SizeRatio_Lattice.pdf, MyData.csv...
+ideally, Results directory should be empty other than, perhaps, a readme. 
+
+Found 28 code files: PP_Regress.R, apply1.R, sample.R, Vectorize.R, run_get_TreeHeight.sh, get_TreeHeight.py, CompileLaTeX.sh, boilerplate.R, TreeHeight.R, PP_Lattice.R, next.R, Girko.R, Vectorize1.R, break.R, plotLin.R, basic_io.R, correlation_result.tex, try.R, apply2.R, get_TreeHeight.R, TAutoCorr.R, browser.R, Vectorize2.R, DataWrangTidy.R, preallocate.R, DataWrang.R, map.R, control.R
 
 ======================================================================
 Testing script/code files...
@@ -292,18 +302,18 @@ Testing apply1.R...
 Output (only first 500 characters): 
 
 **********************************************************************
- [1]  0.11758407  0.33610014  0.45745125  0.42979740  0.23310159  0.48700808
- [7] -0.03648485 -0.34610983  0.42397223 -0.49904347
- [1] 0.4309521 1.0462608 0.9494078 0.8621818 0.4642331 1.2738368 0.9897093
- [8] 0.8169727 0.6813498 1.4088767
- [1]  0.530314234  0.370380938 -0.003895455  0.288908977  0.359949467
- [6] -0.013980945 -0.254293556  0.193998269 -0.032798698  0.164793373
+ [1]  0.51213568 -0.22717066  0.18673545 -0.03824822  0.15783463 -0.12007227
+ [7]  0.14050342 -0.55074079  0.13477697  0.33802611
+ [1] 0.7271322 0.8487832 0.8094429 0.7985654 1.2388136 0.3188069 0.5339607
+ [8] 0.9243121 1.0234818 0.8388199
+ [1]  0.21030246  0.06381087 -0.49866346 -0.05859782  0.37965181 -0.47333144
+ [7]  0.40668203  0.12676220  0.10322945  0.27393421
 
 **********************************************************************
 
 Code ran without errors
 
-Time consumed = 0.11685s
+Time consumed = 0.06694s
 
 ======================================================================
 Inspecting script file sample.R...
@@ -334,22 +344,22 @@ Testing sample.R...
 Output (only first 500 characters): 
 
 **********************************************************************
-[1] "Mean of this sample was: 0.193239991257471"
-[1] "Mean of this sample was: 0.0625712648573257"
-[1] "Mean of this sample was: 0.274443510144101"
-[1] "Mean of this sample was: 0.0391717725841592"
-[1] "Mean of this sample was: 0.18008516360873"
-[1] "Mean of this sample was: 0.221346740868768"
-[1] "Mean of this sample was: 0.386726225765727"
-[1] "Mean of this sample was: 0.323898407090141"
-[1] "Mean of this sample was: 0.425053460874071"
-[1] "Mean of this sample was: -0.0363317901165345"
-[1] "Mea
+[1] "Mean of this sample was: 0.0921443312411596"
+[1] "Mean of this sample was: 0.22260239328693"
+[1] "Mean of this sample was: 0.0269252373041693"
+[1] "Mean of this sample was: 0.0359830459653997"
+[1] "Mean of this sample was: 0.42691483953685"
+[1] "Mean of this sample was: -0.00132299975059291"
+[1] "Mean of this sample was: 0.0123514116760978"
+[1] "Mean of this sample was: 0.00173347278244383"
+[1] "Mean of this sample was: -0.239446630509146"
+[1] "Mean of this sample was: 0.212700683160262"
+[1]
 **********************************************************************
 
 Code ran without errors
 
-Time consumed = 0.17620s
+Time consumed = 0.10782s
 
 ======================================================================
 Inspecting script file Vectorize.R...
@@ -380,15 +390,15 @@ Output (only first 500 characters):
 
 **********************************************************************
    user  system elapsed 
-  0.148   0.000   0.150 
+  0.080   0.000   0.079 
    user  system elapsed 
-  0.000   0.000   0.002 
+  0.004   0.000   0.002 
 
 **********************************************************************
 
 Code ran without errors
 
-Time consumed = 0.40238s
+Time consumed = 0.22360s
 
 ======================================================================
 Inspecting script file run_get_TreeHeight.sh...
@@ -398,6 +408,8 @@ File contents are:
 #!/bin/bash
 
 Rscript get_TreeHeight.R ../Data/trees.csv
+
+python3 get_TreeHeight.py ../Data/trees.csv
 **********************************************************************
 
 Testing run_get_TreeHeight.sh...
@@ -410,7 +422,58 @@ Output (only first 500 characters):
 
 Code ran without errors
 
-Time consumed = 0.17930s
+Time consumed = 0.46232s
+
+======================================================================
+Inspecting script file get_TreeHeight.py...
+
+File contents are:
+**********************************************************************
+#!/usr/bin/env python
+""" This is the python version of get tree height """
+
+__author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'
+__version__ = '0.0.1'
+
+import os
+import sys
+import pandas as pd
+import numpy as np
+import ntpath
+
+a = sys.argv[1]
+
+df = pd.read_csv(a)
+
+df['Height'] = df['Distance.m'] * np.tan(np.deg2rad(df['Angle.degrees']))
+
+#split the input filename and take out the bit we want to insert in the output filename
+a = ntpath.basename(a).split('.')[0]
+addition = "_treeheights.csv"
+outname = a + addition
+path = "../Result/"
+outfilepath = os.path.join(path,outname)
+df.to_csv(outfilepath)
+**********************************************************************
+
+Testing get_TreeHeight.py...
+
+get_TreeHeight.py is a Python script file;
+ checking for docstrings...
+
+Found one or more doctrings!
+
+Output (only first 500 characters): 
+
+**********************************************************************
+
+**********************************************************************
+
+Encountered error:
+Traceback (most recent call last):
+  File "get_TreeHeight.py", line 13, in <module>
+    a = sys.argv[1]
+IndexError: list index out of range
 
 ======================================================================
 Inspecting script file CompileLaTeX.sh...
@@ -474,29 +537,29 @@ rm: cannot remove '*.bbl': No such file or directory
 rm: cannot remove '*.blg': No such file or directory
 mv: cannot stat '.pdf': No such file or directory
 
-** (evince:9867): WARNING **: Error when getting information for file '/home/mhasoba/Documents/Teaching/IC_CMEE/2018-19/Coursework/StudentRepos/ShiyunLiu_SL518/Week3/Code/.pdf': No such file or directory
+** (evince:15567): WARNING **: Error when getting information for file '/home/mhasoba/Documents/Teaching/IC_CMEE/2018-19/Coursework/StudentRepos/ShiyunLiu_SL518/Week3/Code/.pdf': No such file or directory
 
-** (evince:9867): WARNING **: Error setting file metadata: No such file or directory
+** (evince:15567): WARNING **: Error setting file metadata: No such file or directory
 
-** (evince:9867): WARNING **: Error setting file metadata: No such file or directory
+** (evince:15567): WARNING **: Error setting file metadata: No such file or directory
 
-** (evince:9867): WARNING **: Error setting file metadata: No such file or directory
+** (evince:15567): WARNING **: Error setting file metadata: No such file or directory
 
-** (evince:9867): WARNING **: Error setting file metadata: No such file or directory
+** (evince:15567): WARNING **: Error setting file metadata: No such file or directory
 
-** (evince:9867): WARNING **: Error setting file metadata: No such file or directory
+** (evince:15567): WARNING **: Error setting file metadata: No such file or directory
 
-** (evince:9867): WARNING **: Error setting file metadata: No such file or directory
+** (evince:15567): WARNING **: Error setting file metadata: No such file or directory
 
-** (evince:9867): WARNING **: Error setting file metadata: No such file or directory
+** (evince:15567): WARNING **: Error setting file metadata: No such file or directory
 
-** (evince:9867): WARNING **: Error setting file metadata: No such file or directory
+** (evince:15567): WARNING **: Error setting file metadata: No such file or directory
 
-** (evince:9867): WARNING **: Error setting file metadata: No such file or directory
+** (evince:15567): WARNING **: Error setting file metadata: No such file or directory
 
-** (evince:9867): WARNING **: Error setting file metadata: No such file or directory
+** (evince:15567): WARNING **: Error setting file metadata: No such file or directory
 
-** (evince:9867): WARNING **: Error setting file metadata: No such file or directory
+** (evince:15567): WARNING **: Error setting file metadata: No such file or directory
 
 ======================================================================
 Inspecting script file boilerplate.R...
@@ -534,14 +597,14 @@ Output (only first 500 characters):
 
 Code ran without errors
 
-Time consumed = 0.15143s
+Time consumed = 0.11130s
 
 ======================================================================
 Inspecting script file TreeHeight.R...
 
 File contents are:
 **********************************************************************
-#! /usr/bin/env Rscript
+#!/usr/bin/env Rscript
 # Autor: Shiyun Liu s.liu18@imperial.ac.uk
 
 # This function calculates heights of trees given distance of each tree from its base and angle to its top, using  the trigonometric formula 
@@ -592,7 +655,7 @@ Output (only first 500 characters):
 
 Code ran without errors
 
-Time consumed = 0.15009s
+Time consumed = 0.12258s
 
 ======================================================================
 Inspecting script file PP_Lattice.R...
@@ -683,7 +746,7 @@ null device
 
 Code ran without errors
 
-Time consumed = 4.10322s
+Time consumed = 3.50228s
 
 ======================================================================
 Inspecting script file next.R...
@@ -712,7 +775,7 @@ Output (only first 500 characters):
 
 Code ran without errors
 
-Time consumed = 0.08151s
+Time consumed = 0.08699s
 
 ======================================================================
 Inspecting script file Girko.R...
@@ -776,7 +839,7 @@ Inspecting script file Vectorize1.R...
 
 File contents are:
 **********************************************************************
-#! /usr/bin/env Rscript
+#!/usr/bin/env Rscript
 # Autor: Shiyun Liu s.liu18@imperial.ac.uk
 # Runs the stochastic (with gaussian fluctuations) Ricker Eqn .
 
@@ -812,13 +875,13 @@ Output (only first 500 characters):
 **********************************************************************
 [1] "Stochastic Ricker takes:"
    user  system elapsed 
-  0.264   0.004   0.267 
+   0.24    0.00    0.24 
 
 **********************************************************************
 
 Code ran without errors
 
-Time consumed = 0.34221s
+Time consumed = 0.31241s
 
 ======================================================================
 Inspecting script file break.R...
@@ -869,7 +932,7 @@ i equals  19
 
 Code ran without errors
 
-Time consumed = 0.09076s
+Time consumed = 0.08575s
 
 ======================================================================
 Inspecting script file plotLin.R...
@@ -1032,25 +1095,20 @@ Testing try.R...
 Output (only first 500 characters): 
 
 **********************************************************************
-[1] "Mean of this sample was: 0.0497347712999918"
-[1] "Mean of this sample was: -0.0835836355595913"
-[1] "Mean of this sample was: -0.360556124084177"
-[1] "Mean of this sample was: -0.197458486147925"
-[1] "Mean of this sample was: -0.201334301855755"
-[1] "Mean of this sample was: -0.192803107385392"
-[1] "Mean of this sample was: -0.00995874105404888"
-[1] "Mean of this sample was: -0.171940723199291"
-[1] "Mean of this sample was: 0.136628631393159"
-[1] "Mean of this sample was: -0.02584210823283"
-
+[1] "Mean of this sample was: 0.09258432733017"
+[1] "Mean of this sample was: -0.176825726356681"
+[1] "Mean of this sample was: -0.00688538424435812"
+[1] "Mean of this sample was: -0.0905405742333485"
+[1] "Mean of this sample was: -0.133109935021647"
+[1] "Mean of this sample was: 0.216274824029683"
+[1] "Mean of this sample was: 0.0913605135886476"
+[1] "Mean of this sample was: -0.126127021670721"
+[1] "Mean of this sample was: -0.034755042130061"
+[1] "Mean of this sample was: -0.110077823940784"
+[
 **********************************************************************
 
 Encountered error:
-Error in doit(x) : Couldn't calculate mean: too few unique points!
-Error in doit(x) : Couldn't calculate mean: too few unique points!
-Error in doit(x) : Couldn't calculate mean: too few unique points!
-Error in doit(x) : Couldn't calculate mean: too few unique points!
-Error in doit(x) : Couldn't calculate mean: too few unique points!
 Error in doit(x) : Couldn't calculate mean: too few unique points!
 Error in doit(x) : Couldn't calculate mean: too few unique points!
 Error in doit(x) : Couldn't calculate mean: too few unique points!
@@ -1121,25 +1179,25 @@ Testing apply2.R...
 Output (only first 500 characters): 
 
 **********************************************************************
-            [,1]       [,2]        [,3]       [,4]       [,5]        [,6]
- [1,] 132.820385  -23.94728   21.423805 -2.6835223 -0.8396692 -0.95143960
- [2,]  85.761109   48.92910  248.350830  0.3704495 -0.0399031  0.27956965
- [3,]  35.005105  -11.60782   96.140413 -0.5053863  0.4048658 -1.26102629
- [4,] 247.348250   21.37686  113.532678  0.1898157 -0.5562390 -0.99681423
- [5,]  -7.859271  -91.25570  -76.719514  0.1735045 -1.0757256  0.66136364
- [6,] -12.270356  100.49014 -130.273986 -1.5459819  0.595
+             [,1]       [,2]       [,3]      [,4]        [,5]      [,6]
+ [1,]  -29.478149 -0.2604401 -1.2269789 -96.99607  1.04023178  57.20691
+ [2,]   50.026909 -1.1645601 -1.0144610  20.48060  2.34729156 -77.27219
+ [3,]  101.320039  0.4341534 -0.9942454 -43.48246  0.65566564 113.99136
+ [4,]    5.625782 -0.9507202  0.9963918 -29.61446  0.01123291  -4.78064
+ [5,]   38.992941 -1.4012179 -0.5674160 -99.93682 -1.52484046  47.31983
+ [6,] -105.716934  0.3075571  0.4499332 150.50833 -2.68345822  50.346
 **********************************************************************
 
 Code ran without errors
 
-Time consumed = 0.09958s
+Time consumed = 0.09113s
 
 ======================================================================
 Inspecting script file get_TreeHeight.R...
 
 File contents are:
 **********************************************************************
-#! /usr/bin/env Rscript
+#!/usr/bin/env Rscript
 # Autor: Shiyun Liu s.liu18@imperial.ac.uk
 
 # This function calculates heights of trees given distance of each tree from its base and angle to its top, using  the trigonometric formula 
@@ -1202,7 +1260,7 @@ Inspecting script file TAutoCorr.R...
 
 File contents are:
 **********************************************************************
-#! /usr/bin/env Rscript
+#!/usr/bin/env Rscript
 # Autor: Shiyun Liu s.liu18@imperial.ac.uk
 # Analyse the temperature data obtained from 100 years 
 
@@ -1312,14 +1370,14 @@ debug: browser()
 
 Code ran without errors
 
-Time consumed = 0.10949s
+Time consumed = 0.10895s
 
 ======================================================================
 Inspecting script file Vectorize2.R...
 
 File contents are:
 **********************************************************************
-#! /usr/bin/env Rscript
+#!/usr/bin/env Rscript
 # Autor: Shiyun Liu s.liu18@imperial.ac.uk
 # Runs the stochastic (with gaussian fluctuations) Ricker Eqn .
 
@@ -1366,13 +1424,13 @@ Output (only first 500 characters):
 **********************************************************************
 [1] "Vectorized Stochastic Ricker takes:"
    user  system elapsed 
-  0.264   0.000   0.263 
+  0.248   0.000   0.250 
 
 **********************************************************************
 
 Code ran without errors
 
-Time consumed = 0.33755s
+Time consumed = 0.32364s
 
 ======================================================================
 Inspecting script file DataWrangTidy.R...
@@ -1485,7 +1543,7 @@ Output (only first 500 characters):
 
 Code ran without errors
 
-Time consumed = 0.07538s
+Time consumed = 0.14413s
 
 ======================================================================
 Inspecting script file DataWrang.R...
@@ -1561,14 +1619,14 @@ Output (only first 500 characters):
 
 Code ran without errors
 
-Time consumed = 10.00409s
+Time consumed = 10.00691s
 
 ======================================================================
 Inspecting script file map.R...
 
 File contents are:
 **********************************************************************
-#! /usr/bin/env Rscript
+#!/usr/bin/env Rscript
 # Autor: Shiyun Liu s.liu18@imperial.ac.uk
 # map the Global Population Dynamics Database
 
@@ -1614,7 +1672,7 @@ Inspecting script file control.R...
 
 File contents are:
 **********************************************************************
-#! /usr/bin/env Rscript
+#!/usr/bin/env Rscript
 # Autor: Shiyun Liu s.liu18@imperial.ac.uk
 # Some code exemplifying control flow constructs in R 
 
@@ -1690,13 +1748,13 @@ Output (only first 500 characters):
 
 Code ran without errors
 
-Time consumed = 0.09024s
+Time consumed = 0.09170s
 
 ======================================================================
 ======================================================================
 Finished running scripts
 
-Ran into 10 errors
+Ran into 11 errors
 
 ======================================================================
 ======================================================================

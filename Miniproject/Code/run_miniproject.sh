@@ -9,10 +9,10 @@ echo "Running Rscript for data clearing"
 Rscript Prepare_data.R
 
 echo "Running Python script for model fitting"
-python Model_fitting.py
+python3 Model_fitting.py
 
 echo "Running R script to plot the graphs"
-Rscript Prepare_data.R
+Rscript Plot_graph.R
 
 echo "run bash script to compile LaTeX code to pdf..."
 bash CompileLaTeX.sh 

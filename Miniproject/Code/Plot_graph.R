@@ -220,7 +220,7 @@ for (i in 1:n) {
     ylab("Original Trait Value") +
     ggtitle(paste("GroupID:",i)) +
     geom_line(data=cubic_plot(i), aes(x_cubic, y_cubic, color = "Cubic")) + 
-    labs(color = "Model") 
+    labs(color = "Models") 
     
     if (briere_g$Converge == 'Y'){
       plot <- plot + geom_line(data=briere_plot(i), aes(x_briere, y_briere, color = "Briere"))

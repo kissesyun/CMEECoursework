@@ -1,3 +1,4 @@
+library(ggplot2)
 
 x <- seq(0, 100, by = 0.1)
 y <- -4. + 0.25 * x +

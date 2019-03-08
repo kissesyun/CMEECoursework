@@ -10,16 +10,16 @@ import subprocess
 import cProfile
 
 def runLV1():
-	subprocess.os.system("ipython LV1.py")
+	subprocess.os.system("python LV1.py")
 
 def runLV2():
-	subprocess.os.system("ipython LV2.py")
+	subprocess.os.system("python LV2.py")
 
 def runLV3():
-	subprocess.os.system("ipython LV3.py")
+	subprocess.os.system("python LV3.py")
 
 def runLV4():
-	subprocess.os.system("ipython LV4.py")
+	subprocess.os.system("python LV4.py")
 
 cProfile.run("runLV1()")
 cProfile.run("runLV2()")

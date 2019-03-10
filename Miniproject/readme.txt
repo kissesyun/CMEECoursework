@@ -11,7 +11,7 @@ The Code folder contains the coding files used in this project.
 
 The Data folder contains mata-data file.
 
-The Result folder contains outputs from the coding files including project report in pdf.
+The Result folder contains outputs from the coding files including project report (miniproject.pdf) in pdf.
 
 The Sandbox folder contains some former version output files.
 

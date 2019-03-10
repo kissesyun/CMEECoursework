@@ -5,16 +5,16 @@ __author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'
 __version__ = '0.0.1'
 
 
-echo "Running Rscript for data clearing"
+echo "Run Rscript for data clearing"
 Rscript Prepare_data.R
 
-echo "Running Python script for model fitting"
+echo "Run Python script for model fitting"
 python3 Model_fitting.py
 
-echo "Running R script to plot the graphs"
+echo "Run R script to plot the graphs"
 Rscript Plot_graph.R
 
-echo "run bash script to compile LaTeX code for project write-up to pdf named miniproject.pdf..."
+echo "Run bash script to compile LaTeX code for project write-up to pdf named miniproject.pdf..."
 bash CompileLaTeX.sh 
 
 

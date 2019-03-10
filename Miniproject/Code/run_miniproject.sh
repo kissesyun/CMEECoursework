@@ -1,4 +1,4 @@
-#!usr/bin/python
+#!/bin/bash
 """ Bash script to glue all the work for the miniproject"""
 
 __author__ = 'Shiyun Liu s.liu18@imperial.ac.uk'

@@ -1,0 +1,1043 @@
+\cleardoublepage\clearpage
+
+
+\Large \vspace{1cm}
+{\bf Appendix} 
+
+
+\large \vspace{1cm}
+{\bf Appendix 1} 
+\small 
+
+\begin{lstlisting}[language=Python, breaklines]
+
+#!/usr/bin/env python3
+""" This script is used for plotting scatter plot between
+    effect size and frequency for disease variant. 
+    A regression line is also generated """
+
+import pandas as pd
+from plotnine import *
+
+df1 = pd.read_excel('table1.xlsx')
+df2 = pd.read_excel('table2.xlsx')
+
+a = (ggplot(df1) +
+    aes(x='Freq*(1-Freq)', y='Beta') + 
+    geom_point(size=2,show_legend=False) +
+    xlim(0.1,0.25) +
+    ylim(0.5,4) +
+    labs(x = 'Freq(1-Freq)',
+        y = 'Beta (msec)',
+        ) +
+    geom_smooth(method='lm')
+    )
+
+b = (ggplot(df2) +
+    aes(x='Freq*(1-Freq)', y='Beta') + 
+    geom_point(size=2,show_legend=False) +
+    xlim(0.1,0.25) +
+    ylim(0.5,4) +
+    labs(x = 'Freq(1-Freq)',
+        y = 'Beta (msec)',
+        ) +
+    geom_smooth(method='lm')
+    )
+
+a.save("figure1.png",height=100, width=100, units = 'mm', dpi=600)
+b.save("figure2.png",height=100, width=100, units = 'mm', dpi=600)
+
+
+
+\end{lstlisting}
+
+\cleardoublepage\clearpage
+\large \vspace{1cm}
+{\bf Appendix 2} 
+\small 
+
+\begin{lstlisting}[language=Bash,breaklines]
+
+#!/bin/bash
+
+###This is a bash script used to define the 
+###simulation configurations
+###Provided by my supervisor with me modifying some parameters
+
+mkdir -p $2
+
+#Demographic model
+
+NREF=10000 
+
+MARTH1='' 
+MARTH2='-eN 0.05 1 -eN 0 14' 
+MARTH3='-eN 0.0875 1 -eN 0.075 0.2 -eN 0 2' # Marth 3-epoch for CEU
+
+if [ "$3" -eq "1" ]; then
+	DEMO=$MARTH1;
+fi
+if [ "$3" -eq "2" ]; then
+	DEMO=$MARTH2;
+fi
+if [ "$3" -eq "3" ]; then
+	DEMO=$MARTH3;
+fi
+
+# Locus and sample size
+
+LEN=80000 
+THETA=48  # mutation rate in 4*Ne*LEN scale
+RHO=32   # recombination rate
+NCHROMS=198 
+          
+#Selection
+SELPOS=`bc <<< 'scale=2; 1/2'`
+# relative position of selected allele
+FREQ=`bc <<< 'scale=6; 1/100'` 
+# frequency of selected allele 
+if [ $4 == Binary ]; then 
+    SELRANGE=`seq 0 50 400` 
+    # range and step for 
+    #the selection coefficient 
+    #to be estimated in 2*Ne units;
+    NREPL=2000 
+    # number of replicates (simulations) 
+fi
+if [ $4 == Continuous ]; then 
+    SELRANGE=`seq 0 1 400` 
+    NREPL=250 # (250) this is the number 
+   
+fi
+SELTIME=`bc <<< 'scale=4; 600/40000'` # 15kya
+# time for the start of selection in 4*Nref generations; 
+#e.g. 800/40000 is at 20kya, with Ne=10k and 25 years as gen time.
+
+for SEL in $SELRANGE
+do
+    java -jar $1 -N $NREF -ms $NCHROMS $NREPL -t 
+    $THETA -r $RHO $LEN -Sp $SELPOS -SI 
+    $SELTIME 1 $FREQ -SAA $(($SEL*2)) -SAa $SEL -Saa 0 -Smark 
+    $DEMO -thread 4 | gzip > $2/msms..$SEL..$SELTIME..txt.gz
+done
+\end{lstlisting}
+
+
+\cleardoublepage\clearpage
+\large \vspace{1cm}
+{\bf Appendix 3} 
+\small 
+
+\begin{lstlisting}[language=Bash,breaklines]
+
+#!/bin/bash
+
+###Generated with suggestions from my supervisor
+
+MODE=Binary 
+
+DIRDATA=/home/shiyun/Documents/sandbox/Binary3
+
+for repetition in {1..100}
+do
+
+	FNAME=$DIRDATA/Simulations$repetition.Epoch3
+	echo $FNAME
+	mkdir -p $FNAME
+	bash /home/shiyun/Documents/sandbox/simulate.sh /home/shiyun/Documents/msms3.2rc-b163.jar $FNAME 3 $MODE
+done
+\end{lstlisting}
+
+
+\cleardoublepage\clearpage
+\large \vspace{1cm}
+{\bf Appendix 4} 
+\small 
+
+\begin{lstlisting}[language=Python, breaklines]
+###The whole pipeline is too long therefore not showing here
+###The full pipeline can be checked in my github repository: https://github.com/kissesyun/CMEECoursework/tree/master/MResProject
+###or my supervisor's repository: https://github.com/mfumagalli/ImaGene
+###This script is originally and mostly developed by my supervisor with minor contribution from me. I have also modified some section to give better result
+###Therefore only parts of the script are shown here. This is where I had addition and modification
+
+class ImaGene:
+    """
+    A batch of genomic images
+    """
+    def __init__(self, data, positions, description, targets=[], parameter_name=None, classes=[]):
+        self.data = data
+        self.positions = positions
+        self.description = description
+        self.dimensions = (np.zeros(len(self.data)), np.zeros(len(self.data)))
+        self.parameter_name = parameter_name # this is passed by ImaFile.read_simulations()
+        self.targets = np.zeros(len(self.data), dtype='int32')
+        for i in range(len(self.data)):
+            # set targets from file description
+            self.targets[i] = self.description[i][self.parameter_name]
+            # assign dimensions
+            self.dimensions[0][i] = self.data[i].shape[0]
+            self.dimensions[1][i] = self.data[i].shape[1]
+        self.classes = np.unique(self.targets)
+        return None
+        
+def sort(self, ordering):
+        """
+        Sort rows and/or columns given an ordering.
+
+        Keyword Arguments:
+            ordering: either 'rows_freq', 'cols_freq', 'rows_dist', 'cols_dist'
+
+        Returns:
+            0
+        """
+        if ordering == 'rows_freq':
+            for i in range(len(self.data)):
+                uniques, counts = np.unique(self.data[i], return_counts=True, axis=0)
+                counter = 0
+                for j in counts.argsort()[::-1]:
+                    for z in range(counts[j]):
+                        self.data[i][counter,:,:] = uniques[j,:,:]
+                        counter += 1
+        elif ordering == 'cols_freq':
+            for i in range(len(self.data)):
+                uniques, counts = np.unique(self.data[i], return_counts=True, axis=1)
+                counter = 0 #
+                for j in counts.argsort()[::-1]:
+                    for z in range(counts[j]):
+                        self.data[i][:,counter,:] = uniques[:,j,:]
+                        counter += 1
+        elif ordering == 'rows_dist':
+            for i in range(len(self.data)):
+                uniques, counts = np.unique(self.data[i], return_counts=True, axis=0)
+                # most frequent row in float
+                top = uniques[counts.argsort()[::-1][0]].transpose().astype('float32')
+                # distances from most frequent row
+                distances = np.mean(np.abs(uniques[:,:,0] - top), axis=1)
+                # fill in from top to bottom
+                counter = 0
+                for j in distances.argsort():
+                    for z in range(counts[j]):
+                        self.data[i][counter,:,:] = uniques[j,:,:]
+                        counter += 1
+        elif ordering == 'cols_dist':
+            for i in range(len(self.data)):
+                uniques, counts = np.unique(self.data[i], return_counts=True, axis=1)
+                # most frequent column
+                top = uniques[:,counts.argsort()[::-1][0]].astype('float32')
+                # distances from most frequent column
+                distances = np.mean(np.abs(uniques[:,:,0] - top), axis=0)
+                # fill in from left to right
+                counter = 0
+                for j in distances.argsort():
+                    for z in range(counts[j]):
+                        self.data[i][:,counter,:] = uniques[:,j,:]
+                        counter += 1
+        elif ordering == 'rows_similarity':
+            for i in range(len(self.data)):
+                matrix = self.data[i]
+                matrix = np.squeeze(matrix, axis=2)
+                neigh = NearestNeighbors(len(matrix), metric='manhattan')
+                neigh.fit(matrix)
+                inx = neigh.kneighbors(matrix)
+                middle = np.argmin(inx[0].sum(axis=1))
+                matrix = matrix[inx[1][middle]]
+                self.data[i] = matrix[:, :, newaxis]
+        elif ordering == 'cols_similarity':
+            for i in range(len(self.data)):
+                matrix = self.data[i]
+                matrix = np.squeeze(matrix, axis=2)
+                matrix = matrix.transpose()
+                neigh = NearestNeighbors(len(matrix), metric='manhattan')
+                neigh.fit(matrix)
+                inx = neigh.kneighbors(matrix)
+                middle = np.argmin(inx[0].sum(axis=1))
+                matrix = matrix[inx[1][middle]]
+                matrix = matrix.transpose()
+                self.data[i] = matrix[:, :, newaxis]
+        
+        else:
+            print('Select a valid ordering.')
+            return 1
+        return 0
+        
+class ImaNet:
+    """
+    Training and Learning
+    """
+    def __init__(self, name=None, model=None):
+        self.name = name
+        self.scores = {'val_loss': [], 'val_acc': [], 'loss': [], 'acc': [], 'val_mse': [], 'val_mae': [], 'mse': [], 'mae': []}
+        self.test = np.zeros(2)
+        self.values = None # matrix(3,nr_test) true, map, mle
+        return None
+
+    def update_scores(self, score):
+        """
+        Append new scores after each training
+        """
+        for key in self.scores.keys():
+            if key in score.history:
+                self.scores[key].append(score.history[key])
+        return 0
+
+    def plot_train(self, file=None):
+        """
+        Plot training accuracy/mae and loss/mse
+        """
+        if 'loss' in self.scores.keys():
+            loss = self.scores['loss']
+            val_loss = self.scores['val_loss']
+            acc = self.scores['acc']
+            val_acc = self.scores['val_acc']
+        else:
+            loss = self.scores['mse']
+            val_loss = self.scores['val_mse']
+            acc = self.scores['mae']
+            val_acc = self.scores['val_mae']
+        epochs = range(1, len(loss) + 1)
+
+        plt.figure()
+        plt.subplots_adjust(wspace = 0, hspace = 0.4)
+        
+        plt.subplot(211)
+
+        plt.plot(epochs, loss, 'bo', label='Training loss/mse')
+        plt.plot(epochs, val_loss, 'b', label='Validation loss/mse')
+        plt.title('Training and validation loss/mse')
+        plt.legend()
+
+        plt.subplot(212)
+
+        plt.plot(epochs, acc, 'bo', label='Training acc/mae')
+        plt.plot(epochs, val_acc, 'b', label='Validation acc/mae')
+        plt.title('Training and validation accuracy/mae')
+        plt.legend()
+
+        if file==None:
+            plt.show()
+        else:
+            plt.savefig(file)
+
+        return 0
+    def plot_scatter(self, MAP=True, file=None):
+        """
+        Plot scatter plot (on testing set)
+        """
+        if MAP == True:
+            plt.scatter(self.values[0,:], self.values[1,:], marker='o')
+        else:
+            plt.scatter(self.values[0,:], self.values[2,:], marker='o')
+        #plt.title('Relationship between true and predicted values')
+        plt.xlabel('True')
+        plt.ylabel('Predicted')
+        if file==None:
+            plt.show()
+        else:
+            plt.savefig(file)
+            plt.close()
+        return 0
+
+    def plot_cm(self, classes, file=None):
+        """
+        Plot confusion matrix (on testing set)
+        """
+        cm = confusion_matrix(self.values[0,:], self.values[1,:])
+        accuracy = np.trace(cm) / float(np.sum(cm))
+        cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+
+        fig = plt.figure()
+        plt.imshow(cm, interpolation='nearest', cmap= 'Blues' )
+        title = 'Confusion matrix'
+        plt.title(title)
+        plt.colorbar()
+        
+
+        tick_marks = np.arange(len(classes))
+        plt.xticks(tick_marks, classes, fontsize=8)
+        plt.yticks(tick_marks, classes, fontsize=8)
+
+        thresh = cm.max() / 1.5
+        for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+            plt.text(j, i, "{:0.4f}".format(cm[i, j]), horizontalalignment="center", color="white" if cm[i, j] > thresh else "black")
+
+        #plt.tight_layout()
+        plt.ylabel('True label')
+        plt.xlabel('Predicted label\naccuracy={:0.4f}'.format(accuracy))
+        plt.tight_layout()
+
+        if (file==None):
+            plt.show()
+        else:
+            plt.savefig(file)
+            plt.close()
+        return 0
+\end{lstlisting}
+
+
+\cleardoublepage\clearpage
+\large \vspace{1cm}
+{\bf Appendix 5} 
+\small 
+
+\begin{lstlisting}[language=Python,breaklines]
+
+#!/usr/bin/env python3
+"""This script is used to train model for binary classes machine learning
+   Generated with suggestions from my supervisor
+
+"""
+
+import os
+import gzip
+import pickle
+import itertools
+import time
+
+import numpy as np
+from numpy import newaxis 
+import scipy.stats
+
+import skimage.transform
+from keras import models, layers, activations, optimizers, regularizers
+from keras.utils import plot_model
+from keras.models import load_model
+from keras import backend as K
+
+import matplotlib.pyplot as plt
+from sklearn.metrics import confusion_matrix
+from sklearn.neighbors import NearestNeighbors
+import pymc3 # this will be removed
+import pydot # optional
+import h5py 
+
+
+exec(open("/home/shiyun/Documents/sandbox/ImaGene.py").read())
+
+start_time = time.time()
+
+name = 'b33'
+
+
+myfile = ImaFile(simulations_folder='/home/shiyun/Documents/sandbox/Binary3/Simulations1.Epoch3',nr_samples=198, model_name='3epoch-CEU') 
+mygene = myfile.read_simulations(parameter_name='selection_coeff_hetero', max_nrepl=2000)
+#mygene.summary()
+
+#
+#freqs = calculate_allele_frequency(mygene, 0.5)
+#plt.scatter(mygene.targets, freqs, marker='o')
+#plt.xlabel('Target')
+#plt.ylabel('Allele frequency')
+#plt.savefig('/home/shiyun/Documents/sandbox/2000binary/freq_b2.png')
+
+mygene.majorminor()
+mygene.filter_freq(0.01)
+#mygene.sort('rows_similarity')
+#mygene.sort('cols_similarity')
+mygene.sort('rows_freq')
+mygene.sort('cols_freq')
+#mygene.sort('rows_dist')
+#mygene.sort('cols_dist')
+mygene.resize(dimensions=(198, 198))
+mygene.convert(verbose=True)
+
+#for sel in mygene.classes:
+#    print(sel)
+#    index = np.where(mygene.targets == sel)[0][0]
+#    plt.imshow(mygene.data[index][:,:,0], cmap='gray')
+#    plt.savefig('/home/shiyun/Documents/sandbox/2000binary/SC' + str(sel) + '.png')
+
+mygene.summary()
+
+#Binary, only 0 and 300 two classes
+mygene.classes = np.array([0,300])
+classes_idx = get_index_classes(mygene.targets, mygene.classes)
+len(classes_idx)
+
+mygene.subset(classes_idx)
+mygene.summary()
+
+rnd_idx = get_index_random(mygene)
+mygene.subset(rnd_idx)
+
+mygene.targets = to_binary(mygene.targets)
+mygene.save(file='mygene(%s)' %name)
+#mygene = load_imagene(file='mygene(%s)' %name)
+
+model = models.Sequential([
+                    layers.Conv2D(filters=32, kernel_size=(3,3), strides=(1,1), activation='relu', kernel_regularizer=regularizers.l1_l2(l1=0.005, l2=0.005), padding='valid', input_shape=mygene.data.shape[1:4]),
+                    layers.MaxPooling2D(pool_size=(2,2)),
+                    layers.Conv2D(filters=32, kernel_size=(3,3), strides=(1,1), activation='relu', kernel_regularizer=regularizers.l1_l2(l1=0.005, l2=0.005), padding='valid'),
+                    layers.MaxPooling2D(pool_size=(2,2)),
+                    layers.Conv2D(filters=32, kernel_size=(3,3), strides=(1,1), activation='relu', kernel_regularizer=regularizers.l1_l2(l1=0.005, l2=0.005), padding='valid'),
+                    layers.MaxPooling2D(pool_size=(2,2)),
+                    layers.Flatten(),
+                    layers.Dense(units=64, activation='relu'),
+                    #layers.Dense(units=5, activation='softmax')])
+                    layers.Dense(units=1, activation='sigmoid')])
+
+model.compile(optimizer='rmsprop',
+              loss='binary_crossentropy',
+              #loss='categorical_crossentropy',
+              metrics=['accuracy'])
+
+model.summary()
+plot_model(model, 'net(%s).png' %name)
+
+mynet = ImaNet(name='[C32+P]x3+D64+D5')
+
+#e=1
+#while e < 4:
+    #print(e)
+score = model.fit(mygene.data, mygene.targets, batch_size=32, epochs=1, verbose=1, validation_split=0.10)
+mynet.update_scores(score)
+    #e += 1
+
+
+i = 2
+while i < 50:
+
+    print(i)
+    
+    myfile = ImaFile(simulations_folder='/home/shiyun/Documents/sandbox/Binary3/Simulations' + str(i) + '.Epoch3', nr_samples=198, model_name='3epoch-CEU')
+    mygene = myfile.read_simulations(parameter_name='selection_coeff_hetero', max_nrepl=2000)
+
+    mygene.majorminor()
+    mygene.filter_freq(0.01)
+    #mygene.sort('rows_similarity')
+    #mygene.sort('cols_similarity')
+    mygene.sort('rows_freq')
+    mygene.sort('cols_freq')
+    mygene.resize(dimensions=(198, 198))
+    mygene.convert()
+
+    mygene.classes = np.array([0,300])
+    mygene.subset(get_index_classes(mygene.targets, mygene.classes))
+    mygene.subset(get_index_random(mygene))
+
+    mygene.targets = to_binary(mygene.targets)
+    
+    #e=1
+    #while e < 4:
+        #print(e)
+    score = model.fit(mygene.data, mygene.targets, batch_size=32, epochs=1, verbose=1, validation_split=0.10)
+    mynet.update_scores(score)
+        #e += 1
+    
+    
+    i += 1
+
+
+mynet.plot_train(file='Trainning(%s).png' %name)
+model.save('net(%s).h5' %name)
+#model = load_model('net(%s).h5' %name)
+mynet.save(file='mynet(%s)' %name)
+#mynet = load_imanet(file='mynet(%s)' %name)
+
+i = 50
+myfile = ImaFile(simulations_folder='/home/shiyun/Documents/sandbox/Binary3/Simulations' + str(i) + '.Epoch3', nr_samples=198, model_name='3epoch-CEU')
+mygene_test = myfile.read_simulations(parameter_name='selection_coeff_hetero', max_nrepl=2000)
+
+mygene_test.majorminor()
+mygene_test.filter_freq(0.01)
+#mygene_test.sort('rows_similarity')
+#mygene_test.sort('cols_similarity')
+mygene_test.sort('rows_freq')
+mygene_test.sort('cols_freq')
+mygene_test.resize((198, 198))
+mygene_test.convert()
+
+mygene_test.classes = np.array([0,300])
+classes_idx = get_index_classes(mygene_test.targets, mygene_test.classes)
+mygene_test.subset(classes_idx)
+rnd_idx = get_index_random(mygene_test)
+mygene_test.subset(rnd_idx)
+
+mygene_test.targets = to_binary(mygene_test.targets)
+
+mygene_test.save(file='mygene_test(%s)' %name)
+#mygene_test = load_imagene(file='mygene_test(%s)' %name)
+
+mynet.test = model.evaluate(mygene_test.data, mygene_test.targets, batch_size=None, verbose=0)
+print('mynet.test:',mynet.test)
+
+
+
+mynet.predict(mygene_test, model)
+mynet.values.shape
+
+
+
+mynet.plot_cm(mygene_test.classes, file='cm(%s).png' %name)
+plt.close()
+mynet.plot_scatter(file='scatter(%s).png' %name)
+
+
+print("--- %s seconds ---" % (time.time() - start_time))
+
+\end{lstlisting}
+
+
+
+
+
+\cleardoublepage\clearpage
+\large \vspace{1cm}
+{\bf Appendix 6} 
+\small 
+
+\begin{lstlisting}[language=Python,breaklines]
+
+#!/usr/bin/env python3
+"""This script is used to train model for multiple classes machine learning
+   Generated with suggestions from my supervisor
+"""
+
+
+import os
+import gzip
+import pickle
+import itertools
+import time
+
+import numpy as np
+from numpy import newaxis 
+import scipy.stats
+
+import skimage.transform
+from keras import models, layers, activations, optimizers, regularizers
+from keras.utils import plot_model
+from keras.models import load_model
+from keras import backend as K
+
+import matplotlib.pyplot as plt
+from sklearn.metrics import confusion_matrix
+from sklearn.neighbors import NearestNeighbors
+import pymc3 # this will be removed
+import pydot # optional
+import h5py 
+
+
+exec(open("/home/shiyun/Documents/sandbox/ImaGene.py").read())
+
+start_time = time.time()
+
+name = 'm20'
+
+
+myfile = ImaFile(simulations_folder='/home/shiyun/Documents/sandbox/Binary3/Simulations1.Epoch3',nr_samples=198, model_name='3epoch-CEU') 
+mygene = myfile.read_simulations(parameter_name='selection_coeff_hetero', max_nrepl=2000)
+#mygene.summary()
+
+#
+#freqs = calculate_allele_frequency(mygene, 0.5)
+#plt.scatter(mygene.targets, freqs, marker='o')
+#plt.xlabel('Target')
+#plt.ylabel('Allele frequency')
+#plt.savefig('/home/shiyun/Documents/sandbox/2000binary/freq_b2.png')
+
+mygene.majorminor()
+mygene.filter_freq(0.01)
+#mygene.sort('rows_similarity')
+#mygene.sort('cols_similarity')
+mygene.sort('rows_freq')
+mygene.sort('cols_freq')
+mygene.resize(dimensions=(198, 198))
+mygene.convert(verbose=True)
+
+#for sel in mygene.classes:
+#    print(sel)
+#    index = np.where(mygene.targets == sel)[0][0]
+#    plt.imshow(mygene.data[index][:,:,0], cmap='gray')
+#    plt.savefig('/home/shiyun/Documents/sandbox/2000binary/SC' + str(sel) + '.png')
+
+mygene.summary()
+
+
+
+rnd_idx = get_index_random(mygene)
+mygene.subset(rnd_idx)
+
+mygene.targets = to_categorical(mygene.targets)
+#mygene.targets = to_binary(mygene.targets)
+
+mygene.save(file='mygene(%s)' %name)
+#mygene = load_imagene(file='mygene(%s)' %name)
+
+model = models.Sequential([
+                    layers.Conv2D(filters=32, kernel_size=(3,3), strides=(1,1), activation='relu', kernel_regularizer=regularizers.l1_l2(l1=0.005, l2=0.005), padding='valid', input_shape=mygene.data.shape[1:4]),
+                    layers.MaxPooling2D(pool_size=(2,2)),
+                    layers.Conv2D(filters=32, kernel_size=(3,3), strides=(1,1), activation='relu', kernel_regularizer=regularizers.l1_l2(l1=0.005, l2=0.005), padding='valid'),
+                    layers.MaxPooling2D(pool_size=(2,2)),
+                    layers.Conv2D(filters=32, kernel_size=(3,3), strides=(1,1), activation='relu', kernel_regularizer=regularizers.l1_l2(l1=0.005, l2=0.005), padding='valid'),
+                    layers.MaxPooling2D(pool_size=(2,2)),
+                    layers.Flatten(),
+                    #layers.Dense(units=64, activation='relu'),
+                    layers.Dense(units=5, activation='softmax')])
+                    #layers.Dense(units=1, activation='sigmoid')])
+
+model.compile(optimizer='rmsprop',
+              #loss='binary_crossentropy',
+              loss='categorical_crossentropy',
+              metrics=['accuracy'])
+
+model.summary()
+plot_model(model, 'net(%s).png' %name)
+
+mynet = ImaNet(name='[C64+P]x3+D1')
+
+#e=1
+#while e < 4:
+    #print(e)
+score = model.fit(mygene.data, mygene.targets, batch_size=32, epochs=1, verbose=1, validation_split=0.10)
+mynet.update_scores(score)
+    #e += 1
+
+
+i = 2
+while i < 50:
+
+    print(i)
+    
+    myfile = ImaFile(simulations_folder='/home/shiyun/Documents/sandbox/Binary3/Simulations' + str(i) + '.Epoch3', nr_samples=198, model_name='3epoch-CEU')
+    mygene = myfile.read_simulations(parameter_name='selection_coeff_hetero', max_nrepl=2000)
+
+    mygene.majorminor()
+    mygene.filter_freq(0.01)
+    #mygene.sort('rows_similarity')
+    #mygene.sort('cols_similarity')
+    mygene.sort('rows_freq')
+    mygene.sort('cols_freq')
+    mygene.resize(dimensions=(198, 198))
+    mygene.convert()
+
+    #mygene.classes = np.array([0,300])
+    #mygene.subset(get_index_classes(mygene.targets, mygene.classes))
+    mygene.subset(get_index_random(mygene))
+
+    #mygene.targets = to_binary(mygene.targets)
+    mygene.targets = to_categorical(mygene.targets)
+    
+    #e=1
+    #while e < 4:
+        #print(e)
+    score = model.fit(mygene.data, mygene.targets, batch_size=32, epochs=1, verbose=1, validation_split=0.10)
+    mynet.update_scores(score)
+        #e += 1
+    
+    
+    i += 1
+
+
+mynet.plot_train(file='Trainning(%s).png' %name)
+model.save('net(%s).h5' %name)
+#model = load_model('net(%s).h5' %name)
+mynet.save(file='mynet(%s)' %name)
+#mynet = load_imanet(file='mynet(%s)' %name)
+
+i = 50
+myfile = ImaFile(simulations_folder='/home/shiyun/Documents/sandbox/Binary3/Simulations' + str(i) + '.Epoch3', nr_samples=198, model_name='3epoch-CEU')
+mygene_test = myfile.read_simulations(parameter_name='selection_coeff_hetero', max_nrepl=2000)
+
+mygene_test.majorminor()
+mygene_test.filter_freq(0.01)
+#mygene_test.sort('rows_similarity')
+#mygene_test.sort('cols_similarity')
+mygene_test.sort('rows_freq')
+mygene_test.sort('cols_freq')
+mygene_test.resize((198, 198))
+mygene_test.convert()
+
+
+rnd_idx = get_index_random(mygene_test)
+mygene_test.subset(rnd_idx)
+
+mygene_test.targets = to_categorical(mygene_test.targets)
+#mygene_test.targets = to_binary(mygene_test.targets)
+
+mygene_test.save(file='mygene_test(%s)' %name)
+#mygene_test = load_imagene(file='mygene_test(%s)' %name)
+
+mynet.test = model.evaluate(mygene_test.data, mygene_test.targets, batch_size=None, verbose=0)
+print('mynet.test:',mynet.test)
+
+
+
+mynet.predict(mygene_test, model)
+mynet.values.shape
+
+
+mynet.plot_cm(mygene_test.classes, file='cm(%s).png' %name)
+plt.close()
+mynet.plot_scatter(file='scatter(%s).png' %name)
+
+
+
+print("--- %s seconds ---" % (time.time() - start_time))
+\end{lstlisting}
+
+
+
+
+
+
+\cleardoublepage\clearpage
+\large \vspace{1cm}
+{\bf Appendix 7} 
+\small 
+
+\begin{lstlisting}[language=Python,breaklines]
+
+#!/usr/bin/env python3
+"""This script is used to convert vcf files to numpy array that can then be predicted by the trained model"""
+
+
+import allel
+import skimage
+import numpy as np
+from numpy import newaxis
+from sklearn.neighbors import NearestNeighbors
+#import matplotlib.pyplot as plt
+
+#read the vcf file and only extract those with 1 alternative allele
+callset = allel.read_vcf('/home/shiyun/Documents/sandbox/Data/NOS1AP2.vcf', numbers={'ALT': 1,'AF': 1})
+#callset = allel.read_vcf('/home/shiyun/Documents/sandbox/Data/KCNQ1.vcf', numbers={'ALT': 1,'AF': 1})
+#callset = allel.read_vcf('/home/shiyun/Documents/sandbox/Data/CEP85L.vcf', numbers={'ALT': 1,'AF': 1})
+#callset = allel.read_vcf('/home/shiyun/Documents/sandbox/Data/neutral3.vcf', numbers={'ALT': 1,'AF': 1})
+#callset = allel.read_vcf('/home/shiyun/Documents/sandbox/Data/positive.vcf', numbers={'ALT': 1,'AF': 1})
+#callset = allel.read_vcf('/home/shiyun/Documents/sandbox/Data/newKCNQ1.vcf', numbers={'ALT': 1,'AF': 1})
+#callset = allel.read_vcf('/home/shiyun/Documents/sandbox/Data/PLN.vcf', numbers={'ALT': 1,'AF': 1})
+
+#show the fields
+#sorted(callset.keys())
+
+#get the genotype
+gt = allel.GenotypeArray(callset['calldata/GT'])
+#reshape it so that all genotypes (0/0,0/1,1/1) shows along rows. Notice that the row is haplotype while column is SNP sites.
+dim = gt.shape
+dimnew = (dim[0],dim[1]*dim[2],1)
+#remove rows which are all 0 values (means no polymorphism) caused by DataSlicer
+snps = gt.reshape(dimnew)
+r = np.copy(snps)
+r1 = np.squeeze(r, axis=2) #remove the 3rd axis
+r2 = r1[~np.all(r1 == 0, axis=1)] #remove the row where
+r3 = r2.transpose()
+#snpsnew = snpsnew[:, :, newaxis]
+
+
+snpsnew = np.where(r3==1, 255, r3)
+snpsnew = snpsnew[:, :, newaxis]
+
+snpsnew = snpsnew.astype('uint8')
+
+
+#major and minor
+idx = np.where(np.mean(snpsnew[:,:,0]/255., axis=0) > 0.5)[0]
+snpsnew[:,idx,0] = 255. - snpsnew[:,idx,0]
+
+#Remove sites whose minor allele frequency is below the set threshold.
+idx = np.where(np.mean(snpsnew[:,:,0]/255., axis=0) >= 0.01)[0]
+snpsnew = snpsnew[:,idx,:]
+
+#sort function from ImaGene.py
+def sort(data, ordering):
+    """
+    Sort rows and/or columns given an ordering.
+
+    Keyword Arguments:
+        ordering: either 'rows_freq', 'cols_freq', 'rows_dist', 'cols_dist'
+
+        Returns:
+            0
+        """
+    if ordering == 'rows_freq':
+        uniques, counts = np.unique(data, return_counts=True, axis=0)
+        counter = 0
+        for j in counts.argsort()[::-1]:
+            #argsort() used to return the indices that would sort an array.
+            #[::-1] from end to first
+            for z in range(counts[j]):
+                data[counter,:,:] = uniques[j,:,:]
+                counter += 1
+        return data
+    elif ordering == 'cols_freq':
+        uniques, counts = np.unique(data, return_counts=True, axis=1)
+        counter = 0 #
+        for j in counts.argsort()[::-1]:
+            for z in range(counts[j]):
+                data[:,counter,:] = uniques[:,j,:]
+                counter += 1
+        return data
+    elif ordering == 'rows_dist':
+        uniques, counts = np.unique(data, return_counts=True, axis=0)
+        # most frequent row in float
+        top = uniques[counts.argsort()[::-1][0]].transpose().astype('float32')
+        # distances from most frequent row
+        distances = np.mean(np.abs(uniques[:,:,0] - top), axis=1)
+        # fill in from top to bottom
+        counter = 0
+        for j in distances.argsort():
+            for z in range(counts[j]):
+                data[counter,:,:] = uniques[j,:,:]
+                counter += 1
+        return data
+    elif ordering == 'cols_dist':
+        uniques, counts = np.unique(data, return_counts=True, axis=1)
+        # most frequent column
+        top = uniques[:,counts.argsort()[::-1][0]].astype('float32')
+        # distances from most frequent column
+        distances = np.mean(np.abs(uniques[:,:,0] - top), axis=0)
+        # fill in from left to right
+        counter = 0
+        for j in distances.argsort():
+            for z in range(counts[j]):
+                data[:,counter,:] = uniques[:,j,:]
+                counter += 1
+        return data
+    elif ordering == 'rows_similarity':
+        #global snpsnew
+        data = np.squeeze(data, axis=2)
+        neigh = NearestNeighbors(len(data), metric='manhattan')
+        neigh.fit(data)
+        inx = neigh.kneighbors(data)
+        middle = np.argmin(inx[0].sum(axis=1))
+        data = data[inx[1][middle]]
+        data = data[:, :, newaxis]
+        return data
+    elif ordering == 'cols_similarity':
+        data = np.squeeze(data, axis=2)
+        data = data.transpose()
+        neigh = NearestNeighbors(len(data), metric='manhattan')
+        neigh.fit(data)
+        inx = neigh.kneighbors(data)
+        middle = np.argmin(inx[0].sum(axis=1))
+        data = data[inx[1][middle]]
+        data = data.transpose()
+        data = data[:, :, newaxis]
+        return data
+snpsnew = sort(snpsnew,'rows_freq') 
+snpsnew = sort(snpsnew,'cols_freq')
+#snpsnew = sort(snpsnew,'rows_dist') 
+#snpsnew = sort(snpsnew,'cols_dist')
+#snpsnew = sort(snpsnew,'rows_similarity')
+#snpsnew = sort(snpsnew,'cols_similarity')
+
+
+#resize the image to desired dimension
+image = np.copy(snpsnew[:,:,0])
+data = np.zeros((198, 198, 1), dtype='uint8')
+data[:,:,0] = (skimage.transform.resize(image, (198,198), anti_aliasing=True, mode='reflect')*255).astype('uint8')
+del image
+data = (np.where(data < 128, 0, 255)).astype('uint8')
+
+
+#convert to float32
+data = data.astype('float32')
+data /= 255.
+
+#flip it
+data = 1. - data
+
+
+#save the numpy array
+np.save('/home/shiyun/Documents/sandbox/Data/NOS1AP2.vcf.npy',data)
+#np.save('/home/shiyun/Documents/sandbox/Data/KCNQ1.vcfs.npy',data)
+#np.save('/home/shiyun/Documents/sandbox/Data/CEP85L.vcf.npy',data)
+#np.save('/home/shiyun/Documents/sandbox/Data/neutral3.vcf.npy',data)
+#np.save('/home/shiyun/Documents/sandbox/Data/positive.vcfss.npy',data)
+#np.save('/home/shiyun/Documents/sandbox/Data/newKCNQ1.vcf.npy',data)
+#np.save('/home/shiyun/Documents/sandbox/Data/PLN.vcf.npy',data)
+\end{lstlisting}
+
+
+
+\cleardoublepage\clearpage
+\large \vspace{1cm}
+{\bf Appendix 8} 
+\small 
+
+\begin{lstlisting}[language=Python,breaklines]
+#!/usr/bin/env python3
+"""This script is used to make predictions by trained CNN algorithm
+"""
+
+
+
+
+import os
+import gzip
+import pickle
+import itertools
+import time
+
+import numpy as np
+from numpy import newaxis 
+import scipy.stats
+
+import skimage.transform
+from keras import models, layers, activations, optimizers, regularizers
+from keras.utils import plot_model
+from keras.models import load_model
+from keras import backend as K
+
+import matplotlib.pyplot as plt
+from sklearn.metrics import confusion_matrix
+from sklearn.neighbors import NearestNeighbors
+import pymc3 # this will be removed
+import pydot # optional
+import h5py 
+
+
+exec(open("/home/shiyun/Documents/sandbox/ImaGene.py").read())
+
+
+#test any model that is picked
+#model = load_model('net(m20).h5')
+
+
+snps = np.load('/home/shiyun/Documents/sandbox/Data/KCNQ1.vcf.npy')
+snpsnew = snps[newaxis,:, :, :]
+result = model.predict(snpsnew, batch_size=32)
+print('result:', result)
+
+snps = np.load('/home/shiyun/Documents/sandbox/Data/NOS1AP_1.vcf.npy')
+snpsnew = snps[newaxis,:, :, :]
+result = model.predict(snpsnew, batch_size=32)
+print('result2:', result)
+
+snps = np.load('/home/shiyun/Documents/sandbox/Data/CEP85L.vcf.npy')
+snpsnew = snps[newaxis,:, :, :]
+result = model.predict(snpsnew, batch_size=32)
+print('result3:', result)
+
+snps = np.load('/home/shiyun/Documents/sandbox/Data/neutral2.vcf.npy')
+snpsnew = snps[newaxis,:, :, :]
+result = model.predict(snpsnew, batch_size=32)
+print('result4:', result)
+
+snps = np.load('/home/shiyun/Documents/sandbox/Data/positive.vcf.npy')
+snpsnew = snps[newaxis,:, :, :]
+result = model.predict(snpsnew, batch_size=32)
+print('result5:', result)
+
+snps = np.load('/home/shiyun/Documents/sandbox/Data/neutral3.vcf.npy')
+snpsnew = snps[newaxis,:, :, :]
+result = model.predict(snpsnew, batch_size=32)
+print('result6:', result)
+
+
+snps = np.load('/home/shiyun/Documents/sandbox/Data/newKCNQ1.vcf.npy')
+snpsnew = snps[newaxis,:, :, :]
+result = model.predict(snpsnew, batch_size=32)
+print('result7:', result)
+
+snps = np.load('/home/shiyun/Documents/sandbox/Data/PLN.vcf.npy')
+snpsnew = snps[newaxis,:, :, :]
+result = model.predict(snpsnew, batch_size=32)
+print('result8:', result)
+
+snps = np.load('/home/shiyun/Documents/sandbox/Data/NOS1AP2.vcf.npy')
+snpsnew = snps[newaxis,:, :, :]
+result = model.predict(snpsnew, batch_size=32)
+print('result9:', result)
+\end{lstlisting}
